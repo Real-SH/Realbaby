@@ -1,0 +1,12 @@
+﻿node_modules/
+.next/
+out/
+coverage/
+.vscode/
+.env.local
+.env
+.DS_Store
+Thumbs.db
+tools/
+outputs/
+.tmp_openclaw_skills/
