@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.realbabyglobal.com"),
+  metadataBase: new URL("https://www.realbabytoy.com"),
   title: "Realbaby | OEM & ODM Baby Products Manufacturer",
   description:
     "Realbaby is a source manufacturer and OEM/ODM solution provider for baby products including Play Gym, Quiet Books, and AI Friends.",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "Realbaby | OEM & ODM Baby Products Manufacturer",
     description:
       "B2B baby product supplier for importers, wholesalers, supermarkets, and e-commerce brands.",
-    url: "https://www.realbabyglobal.com",
+    url: "https://www.realbabytoy.com",
     siteName: "Realbaby",
     locale: "en_US",
     type: "website"
