@@ -38,10 +38,10 @@ const processSteps = [
 ];
 
 const complianceDocs = [
-  ["ASTM F963", "/images/compliance/astm.webp"],
-  ["CPC", "/images/compliance/cpc.webp"],
-  ["EN71", "/images/compliance/en71.webp"],
-  ["CE / DoC", "/images/compliance/ce.webp"]
+  ["ASTM F963", "/images/compliance/astm-redacted.png"],
+  ["CPC", "/images/compliance/cpc-redacted.png"],
+  ["EN71", "/images/compliance/en71-redacted.png"],
+  ["CE / DoC", "/images/compliance/ce-redacted.png"]
 ];
 
 const buyerFeedback = [
@@ -269,7 +269,7 @@ export default function HomePage() {
           <div className="container">
             <div className={styles.sectionHead}>
               <div><p>QUALITY & SAFETY SUPPORT</p><h2>Evidence for the product and market in front of us.</h2></div>
-              <p>Selected products have supporting documentation for EN71, ASTM, and CPC-related requirements. Files are shared by project and destination market.</p>
+              <p>Selected products have supporting documentation for EN71, ASTM, and CPC-related requirements. Representative documents are shown with company and client details redacted for confidentiality.</p>
             </div>
             <div className={styles.qualityLayout}>
               <div className={styles.documentGrid}>
@@ -282,7 +282,7 @@ export default function HomePage() {
                 <h3>Documentation without overclaiming.</h3>
                 <p>Audit and compliance availability varies by manufacturing partner, product construction, and buyer program. We confirm the applicable scope before quotation. Sensitive operational details are redacted in public previews.</p>
                 <div>
-                  <Image src="/images/compliance/costco-audit.webp" alt="Redacted representative Costco audit document" width={1188} height={1107} />
+                  <Image src="/images/compliance/retailer-audit-redacted.png" alt="Redacted representative retailer audit document" width={1188} height={1107} />
                   <Image src="/images/compliance/sedex-report.webp" alt="Representative Sedex report document" width={888} height={1170} />
                 </div>
               </aside>

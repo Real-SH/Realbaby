@@ -11,8 +11,9 @@ export function generateStaticParams() {
   return insights.map((insight) => ({ slug: insight.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const insight = findInsight(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const insight = findInsight(slug);
   if (!insight) return { title: "Buyer Insight" };
   return {
     title: insight.title,
@@ -27,8 +28,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function InsightDetailPage({ params }: { params: { slug: string } }) {
-  const insight = findInsight(params.slug);
+export default async function InsightDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const insight = findInsight(slug);
   if (!insight) notFound();
 
   const related = insights.filter((item) => item.slug !== insight.slug).slice(0, 3);
@@ -60,7 +62,7 @@ export default function InsightDetailPage({ params }: { params: { slug: string }
             <p className="inner-lead">{insight.summary}</p>
             <div className="insight-meta insight-meta-large"><span>Updated {insight.updated}</span><span>{insight.readTime}</span></div>
           </div>
-          <div className="insight-detail-image"><Image src={insight.image} alt={insight.imageAlt} width={1100} height={760} priority sizes="(max-width: 900px) 100vw, 44vw" /></div>
+          <div className="insight-detail-image"><Image src={insight.image} alt={insight.imageAlt} width={1100} height={760} priority sizes="(max-width: 900px) 100vw, 44vw" unoptimized={insight.image.includes("/images/compliance/")} /></div>
         </section>
 
         <section className="section insight-article-section">

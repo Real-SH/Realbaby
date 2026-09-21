@@ -64,7 +64,7 @@ export const insights: Insight[] = [
     category: "Quality & Compliance",
     title: "EN71, ASTM F963 and CPSIA: A Buyer's Starting Checklist",
     summary: "What B2B buyers should clarify before arranging testing for soft baby toys and developmental products.",
-    image: "/images/compliance/astm.webp",
+    image: "/images/compliance/astm-redacted.png",
     imageAlt: "Representative baby product compliance document",
     updated: "September 2026",
     readTime: "6 min read",

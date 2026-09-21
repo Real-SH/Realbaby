@@ -7,14 +7,16 @@ import { products } from "../../data";
 
 export function generateStaticParams() { return products.map((product) => ({ slug: product.slug })); }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const product = products.find((item) => item.slug === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = products.find((item) => item.slug === slug);
   if (!product) return { title: "Product | Realbaby" };
   return { title: `${product.name} OEM/ODM`, description: product.summary, alternates: { canonical: `/products/${product.slug}` }, openGraph: { title: `${product.name} OEM/ODM`, description: product.summary, images: [{ url: product.image, alt: product.imageAlt }] } };
 }
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  const product = products.find((item) => item.slug === params.slug);
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = products.find((item) => item.slug === slug);
   if (!product) notFound();
   const relatedProducts = products.filter((item) => item.slug !== product.slug && (item.series === product.series || item.category === product.category)).slice(0, 3);
   return (
