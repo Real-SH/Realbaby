@@ -33,6 +33,7 @@ function validateForm(values: InquiryFormState): FieldErrors {
   if (!values.email.trim()) errors.email = "Please enter your email address.";
   else if (!isValidEmail(values.email.trim())) errors.email = "Please enter a valid email.";
   if (!values.country.trim()) errors.country = "Please enter your country or region.";
+  if (!values.buyerType.trim()) errors.buyerType = "Please select or enter your buyer type.";
   if (!values.productRequirement.trim()) errors.productRequirement = "Please tell us which product you need.";
   if (!values.message.trim()) errors.message = "Please share your sourcing requirements.";
   if (!isValidPhone(values.phone)) errors.phone = "Use a valid international number.";
@@ -128,15 +129,35 @@ export default function ContactPage() {
                 return (
                   <div className={styles.field} key={field.name}>
                     <label htmlFor={field.name}>{field.label} {field.required ? <span className={styles.requiredMark}>*</span> : null}</label>
-                    <input id={field.name} name={field.name} type={field.type} placeholder={field.placeholder} value={form[name]} onChange={handleChange} aria-invalid={Boolean(errors[name])} />
-                    {errors[name] ? <p className={styles.errorHint}>{errors[name]}</p> : null}
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      value={form[name]}
+                      onChange={handleChange}
+                      required={field.required}
+                      aria-invalid={Boolean(errors[name])}
+                      aria-describedby={errors[name] ? `${field.name}-error` : undefined}
+                    />
+                    {errors[name] ? <p id={`${field.name}-error`} className={styles.errorHint}>{errors[name]}</p> : null}
                   </div>
                 );
               })}
               <div className={`${styles.field} ${styles.fullWidth}`}>
                 <label htmlFor="message">Message <span className={styles.requiredMark}>*</span></label>
-                <textarea id="message" name="message" rows={6} placeholder="Target market, product features, packaging preferences, and timeline..." value={form.message} onChange={handleChange} aria-invalid={Boolean(errors.message)} />
-                {errors.message ? <p className={styles.errorHint}>{errors.message}</p> : null}
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={6}
+                  placeholder="Target market, product features, packaging preferences, and timeline..."
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? "message-error" : undefined}
+                />
+                {errors.message ? <p id="message-error" className={styles.errorHint}>{errors.message}</p> : null}
               </div>
             </div>
             <div className={styles.honeypot} aria-hidden="true">
