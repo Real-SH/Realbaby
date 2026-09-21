@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "../../../components/SiteChrome";
 import { findInsight, insights } from "../data";
+import { siteUrl } from "../../site-config";
 
 export const dynamicParams = false;
 
@@ -39,15 +40,15 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
     "@type": "Article",
     headline: insight.title,
     description: insight.summary,
-    image: `https://www.realbabytoy.com${insight.image}`,
+    image: `${siteUrl}${insight.image}`,
     dateModified: "2026-09-22",
     author: { "@type": "Organization", name: "Realbaby" },
     publisher: {
       "@type": "Organization",
       name: "Realbaby",
-      logo: { "@type": "ImageObject", url: "https://www.realbabytoy.com/logo-primary.png" }
+      logo: { "@type": "ImageObject", url: `${siteUrl}/logo-primary.png` }
     },
-    mainEntityOfPage: `https://www.realbabytoy.com/insights/${insight.slug}`
+    mainEntityOfPage: `${siteUrl}/insights/${insight.slug}`
   };
 
   return (

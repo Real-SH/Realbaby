@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { allowIndexing, siteUrl } from "./site-config";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.realbabytoy.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Realbaby | Baby Soft Play & Developmental Products OEM/ODM",
     template: "%s | Realbaby"
   },
   description:
     "Realbaby is a baby soft play and developmental products OEM/ODM partner for importers, baby brands, education channels, retailers, and e-commerce buyers.",
-  robots: { index: true, follow: true },
+  robots: allowIndexing
+    ? { index: true, follow: true }
+    : { index: false, follow: false, noarchive: true, nocache: true },
   keywords: [
     "Realbaby",
     "baby activity gym manufacturer",
@@ -24,7 +27,7 @@ export const metadata: Metadata = {
     title: "Realbaby | Baby Soft Play & Developmental Products OEM/ODM",
     description:
       "B2B development partner for baby activity gyms, soft quiet books, comfort blankets, plush soothers, and retail-ready baby collections.",
-    url: "https://www.realbabytoy.com",
+    url: siteUrl,
     siteName: "Realbaby",
     locale: "en_US",
     type: "website",
@@ -46,8 +49,8 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Realbaby",
-  url: "https://www.realbabytoy.com",
-  logo: "https://www.realbabytoy.com/logo-primary.png",
+  url: siteUrl,
+  logo: `${siteUrl}/logo-primary.png`,
   foundingDate: "2015",
   description: "Baby soft play and developmental products OEM/ODM partner for global B2B buyers.",
   email: "real@realbaby.cn",
