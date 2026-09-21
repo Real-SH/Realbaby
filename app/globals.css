@@ -939,6 +939,19 @@ p {
   font-weight: 800;
 }
 
+.fact-panel small {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.about-actions {
+  margin-top: 28px;
+}
+
+.values-grid-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .product-catalog-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1256,6 +1269,10 @@ p {
 
   .product-detail-image {
     max-width: 700px;
+  }
+
+  .values-grid-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

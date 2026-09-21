@@ -6,9 +6,10 @@ import { buyerChannels, playMoments, products, productSeries } from "./data";
 import styles from "./home.module.css";
 
 const proofPoints = [
-  ["15", "developed product directions"],
-  ["500 pcs", "typical custom project MOQ"],
-  ["EN71 · ASTM · CPC", "market-specific testing support"]
+  ["500 pcs+", "typical MOQ for many custom soft-product projects"],
+  ["10-15 days", "typical standard sampling reference"],
+  ["40-70 days", "typical production lead-time reference"],
+  ["US · CA · AU · UK · EU", "main export market focus"]
 ];
 
 const customCapabilities = [
@@ -38,12 +39,32 @@ const complianceDocs = [
   ["CE / DoC", "/images/compliance/ce.webp"]
 ];
 
+const buyerFeedback = [
+  {
+    quote: "The bear was absolutely perfect. Quality and service were outstanding.",
+    buyer: "C***a, USA",
+    project: "Custom mini plush set"
+  },
+  {
+    quote: "Very nice supplier and good quality. We have started long-term cooperation.",
+    buyer: "S***r, Netherlands",
+    project: "My Quiet Book"
+  }
+];
+
+const feedbackThemes = [
+  "Product quality and finish",
+  "Responsive development communication",
+  "Repeat and long-term cooperation",
+  "Delivery follow-through"
+];
+
 const faqItems = [
   ["What is the MOQ for a custom project?", "The typical MOQ is 500 pieces for most custom projects. The final quantity depends on construction, materials, packaging, and customization depth."],
   ["Can Realbaby develop a sample before production?", "Yes. We align the brief, artwork, materials, functions, and packaging direction before sampling, then revise agreed details before bulk approval."],
   ["Which parts of a product can be customized?", "Options can include character design, colors, fabric, activity details, embroidery or printing, labels, instruction cards, gift packaging, and export cartons."],
   ["Do you support EN71, ASTM, or CPC requirements?", "Testing and documentation support is planned for the actual product and destination market. Representative documents can be reviewed during the project."],
-  ["How long do sampling and bulk production take?", "Timing varies by product complexity, testing needs, and approval rounds. We provide a project-specific schedule after reviewing your requirements."],
+  ["How long do sampling and bulk production take?", "Standard soft-product sampling is typically 10-15 days, while production is typically 40-70 days. Final timing depends on construction, materials, packaging, testing, order quantity, and approval rounds."],
   ["Which buyers do you work with?", "Realbaby works with importers, distributors, baby brands, retail chains, e-commerce sellers, education channels, and gift or subscription programs."]
 ];
 
@@ -74,8 +95,8 @@ export default function HomePage() {
                 thoughtful soft play, comfort, and early-learning collections.
               </p>
               <div className={styles.heroActions}>
-                <Link className="btn btn-primary" href="/contact">Start a Project</Link>
-                <Link className="btn btn-outline" href="/products">Explore Products</Link>
+                <Link className="btn btn-primary" href="/contact">Get a Quote</Link>
+                <a className="btn btn-outline" href="/realbaby-product-catalog.pdf">Download 2026 Catalog</a>
               </div>
               <div className={styles.heroNotes} aria-label="Key service facts">
                 <span>Product development</span>
@@ -100,18 +121,24 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          <div className={`container ${styles.proofRail}`}>
-            {proofPoints.map(([value, label]) => (
-              <div key={label}><strong>{value}</strong><span>{label}</span></div>
-            ))}
+          <div className={`container ${styles.proofBlock}`}>
+            <div className={styles.proofHeading}>
+              <span>REAL CAPABILITY. CLEAR NUMBERS.</span>
+              <p>Reference values for buyer planning. Final terms are confirmed by product and project.</p>
+            </div>
+            <div className={styles.proofRail} aria-label="Realbaby commercial reference data">
+              {proofPoints.map(([value, label]) => (
+                <div key={label}><strong>{value}</strong><span>{label}</span></div>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className={styles.audience} aria-label="Who we serve">
           <div className={`container ${styles.audienceInner}`}>
             <strong>Built for professional buyers</strong>
-            <span>Importers</span><span>Baby Brands</span><span>Retail Chains</span>
-            <span>E-commerce</span><span>Education</span>
+            <span>Importers & Distributors</span><span>Baby Brands</span><span>Education Channels</span>
+            <span>Baby Stores</span><span>E-commerce & Amazon</span><span>Retail Chains</span>
           </div>
         </section>
 
@@ -227,7 +254,7 @@ export default function HomePage() {
                 <p className={styles.eyebrow}>MATERIALS · DETAILS · PACKAGING</p>
                 <h3>Development support with clear checkpoints.</h3>
                 <p>Fabric selection, embroidery, printing, construction, quality checks, packaging, and export preparation are confirmed against the approved project brief.</p>
-                <div className={styles.materialTags}><span>Soft textiles</span><span>Embroidery</span><span>Private label</span><span>Export packing</span></div>
+                <div className={styles.materialTags}><span>Material preparation</span><span>Embroidery</span><span>Sewing</span><span>Assembly & finishing</span><span>Quality check</span><span>Packing & warehouse</span></div>
               </div>
             </div>
           </div>
@@ -258,15 +285,43 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className={styles.feedbackSection} aria-labelledby="buyer-feedback-title">
+          <div className="container">
+            <div className={`${styles.sectionHead} ${styles.feedbackHead}`}>
+              <div><p>SELECTED BUYER FEEDBACK</p><h2 id="buyer-feedback-title">What buyers value after delivery.</h2></div>
+              <p>Names remain masked as shown in the supplied review evidence. Quotes represent selected completed projects.</p>
+            </div>
+            <div className={styles.feedbackLayout}>
+              <div className={styles.feedbackQuotes}>
+                {buyerFeedback.map((item) => (
+                  <blockquote key={item.buyer}>
+                    <span aria-hidden="true">“</span>
+                    <p>{item.quote}</p>
+                    <footer><strong>{item.buyer}</strong><small>{item.project}</small></footer>
+                  </blockquote>
+                ))}
+              </div>
+              <aside className={styles.feedbackThemes}>
+                <p className={styles.eyebrow}>RECURRING THEMES</p>
+                {feedbackThemes.map((theme, index) => <div key={theme}><span>0{index + 1}</span><strong>{theme}</strong></div>)}
+              </aside>
+            </div>
+          </div>
+        </section>
+
         <section className={styles.storySection} id="about">
           <div className={`container ${styles.storyGrid}`}>
             <div className={styles.storyImage}><Image src="/images/company/team.webp" alt="Realbaby team presentation" width={1448} height={1086} /></div>
             <div>
               <p className={styles.eyebrow}>BEHIND REALBABY</p>
               <h2>Real people. Real passion. Real dedication.</h2>
-              <p>Founded in 2015, Realbaby focuses on baby soft play and developmental products for international buyers. Our work connects product thinking, commercial clarity, and reliable follow-through.</p>
+              <p>Founded in 2015, Realbaby focuses on baby soft play and developmental products for international buyers.</p>
+              <p>We believe children grow through real touch, real exploration, real companionship, and real play. Our work connects developmental thinking with commercially practical OEM/ODM execution.</p>
               <blockquote>“We are not here to make children grow faster. We are here to help them grow more naturally.”</blockquote>
-              <Link className={styles.arrowLink} href="/about">Meet Realbaby <span>↗</span></Link>
+              <div className={styles.storyActions}>
+                <Link className={styles.arrowLink} href="/about">Meet Realbaby <span>↗</span></Link>
+                <a className={styles.documentLink} href="/realbaby-company-profile-2026.pdf">Download Company Profile</a>
+              </div>
             </div>
           </div>
         </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
 import styles from "./contact.module.css";
 
@@ -39,6 +39,15 @@ function validateForm(values: InquiryFormState): FieldErrors {
   return errors;
 }
 
+function currentAttribution() {
+  const source = new URLSearchParams(window.location.search);
+  const attribution = new URLSearchParams();
+  source.forEach((value, key) => {
+    if (key.startsWith("utm_") || key === "gclid" || key === "fbclid") attribution.set(key, value);
+  });
+  return attribution.toString();
+}
+
 export default function ContactPage() {
   const [form, setForm] = useState(initialFormState);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -48,6 +57,11 @@ export default function ContactPage() {
   const missingRequired = useMemo(
     () => requiredFields.some((field) => !form[field].trim()), [form]
   );
+
+  useEffect(() => {
+    const product = new URLSearchParams(window.location.search).get("product")?.trim();
+    if (product) setForm((current) => ({ ...current, productRequirement: product }));
+  }, []);
 
   function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const key = event.target.name as keyof InquiryFormState;
@@ -67,7 +81,7 @@ export default function ContactPage() {
       const response = await fetch("/api/inquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, sourcePath: "/contact", startedAt: startedAtRef.current })
+        body: JSON.stringify({ ...form, utm: currentAttribution(), sourcePath: "/contact", startedAt: startedAtRef.current })
       });
       const result = (await response.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
       if (!response.ok || !result?.ok) throw new Error(result?.message || "Submission failed. Please try again.");

@@ -14,13 +14,13 @@ export function SiteHeader() {
             <li><Link href="/products">Products</Link></li>
             <li><Link href="/#moments">Play Moments</Link></li>
             <li><Link href="/#oem">OEM / ODM</Link></li>
+            <li><Link href="/#capability">Manufacturing</Link></li>
             <li><Link href="/#quality">Quality</Link></li>
             <li><Link href="/about">About</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </nav>
         <div className="header-actions">
-          <a className="btn btn-outline" href="/realbaby-product-catalog.pdf">Catalog</a>
+          <a className="btn btn-outline" href="/realbaby-product-catalog.pdf">2026 Catalog</a>
           <Link className="btn btn-primary" href="/contact">Get a Quote</Link>
         </div>
       </div>
@@ -42,7 +42,11 @@ export function SiteFooter() {
             <Link href="/products">Products</Link>
             <Link href="/#moments">Play Moments</Link>
             <Link href="/#oem">OEM / ODM</Link>
+            <Link href="/#capability">Manufacturing</Link>
+            <Link href="/#quality">Quality & Safety</Link>
             <Link href="/about">About Realbaby</Link>
+            <a href="/realbaby-product-catalog.pdf">2026 Product Catalog</a>
+            <a href="/realbaby-company-profile-2026.pdf">Company Profile</a>
             <Link href="/privacy-policy">Privacy Policy</Link>
           </nav>
           <div>

@@ -8,7 +8,9 @@ export const metadata: Metadata = {
     template: "%s | Realbaby"
   },
   description:
-    "Realbaby develops OEM/ODM baby soft play and developmental products including activity gyms, soft quiet books, comfort blankets, plush soothers, and retail packaging for global B2B buyers.",
+    "Realbaby is a baby soft play and developmental products OEM/ODM partner for importers, baby brands, education channels, retailers, and e-commerce buyers.",
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
   keywords: [
     "Realbaby",
     "baby activity gym manufacturer",
@@ -26,7 +28,13 @@ export const metadata: Metadata = {
     url: "https://www.realbabytoy.com",
     siteName: "Realbaby",
     locale: "en_US",
-    type: "website"
+    type: "website",
+    images: [{
+      url: "/images/hero/realbaby-collection.webp",
+      width: 1672,
+      height: 941,
+      alt: "Realbaby baby soft play and developmental product collection"
+    }]
   },
   twitter: {
     card: "summary_large_image",
@@ -42,7 +50,17 @@ const organizationSchema = {
   url: "https://www.realbabytoy.com",
   logo: "https://www.realbabytoy.com/logo-primary.png",
   foundingDate: "2015",
+  description: "Baby soft play and developmental products OEM/ODM partner for global B2B buyers.",
   email: "real@realbaby.cn",
+  areaServed: ["United States", "Canada", "Australia", "United Kingdom", "Europe"],
+  knowsAbout: [
+    "Baby activity gyms and play mats",
+    "Soft books and cloth books",
+    "Quiet books and busy play",
+    "Comfort blankets and plush companions",
+    "Sensory soft toys",
+    "Private label and retail packaging"
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",

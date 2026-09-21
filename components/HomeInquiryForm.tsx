@@ -5,6 +5,15 @@ import styles from "../app/home.module.css";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+function currentAttribution() {
+  const source = new URLSearchParams(window.location.search);
+  const attribution = new URLSearchParams();
+  source.forEach((value, key) => {
+    if (key.startsWith("utm_") || key === "gclid" || key === "fbclid") attribution.set(key, value);
+  });
+  return attribution.toString();
+}
+
 export function HomeInquiryForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [feedback, setFeedback] = useState("");
@@ -31,6 +40,7 @@ export function HomeInquiryForm() {
           productRequirement: data.get("productRequirement"),
           quantity: data.get("quantity"),
           message: data.get("message"),
+          utm: currentAttribution(),
           website: data.get("website"),
           sourcePath: "/#inquiry",
           startedAt: startedAt.current

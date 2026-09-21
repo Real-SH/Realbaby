@@ -16,15 +16,15 @@ export default function ProductsPage() {
       <main className="inner-page">
         <section className="inner-hero product-index-hero">
           <div className="container inner-hero-grid">
-            <div><p className="section-kicker">Realbaby Product Collection</p><h1>Designed around how childhood really happens.</h1><p className="inner-lead">Explore fifteen developed directions across first play, hands-on learning, and everyday comfort. Each can be adapted for your market, channel, and brand.</p></div>
-            <div className="fact-panel"><strong>3 focused series · 15 directions</strong><span>Typical custom MOQ: 500 pieces</span><span>Private label and custom packaging</span><span>Market-specific testing support</span></div>
+            <div><p className="section-kicker">Realbaby Product Collection</p><h1>Designed around how childhood really happens.</h1><p className="inner-lead">Explore fifteen developed directions across first play, hands-on learning, and everyday comfort. Each can be adapted for your market, sales channel, price direction, and brand.</p><div className="cta-row about-actions"><Link className="btn btn-primary" href="/contact">Request a Proposal</Link><a className="btn btn-outline" href="/realbaby-product-catalog.pdf">Download 2026 Catalog</a></div></div>
+            <div className="fact-panel"><strong>3 focused series · 15 directions</strong><span>Typical MOQ: 500 pcs+</span><span>Typical sampling: 10-15 days</span><span>Typical production: 40-70 days</span><span>EN71 / ASTM F963 / CPSIA-CPC coordination</span><small>Reference values only. Final terms are confirmed for the actual product and project.</small></div>
           </div>
         </section>
 
         {productSeries.map((series) => {
           const seriesProducts = products.filter((product) => product.series === series.name);
           return (
-            <section className="section product-series-block" key={series.name}>
+            <section className="section product-series-block" id={series.name.toLowerCase().replaceAll(" ", "-")} key={series.name}>
               <div className="container">
                 <div className="product-series-heading"><div><p className="section-kicker">{series.age}</p><h2>{series.name}</h2></div><p>{series.description}</p></div>
                 <div className="product-catalog-grid">
@@ -40,7 +40,7 @@ export default function ProductsPage() {
           );
         })}
 
-        <section className="section band"><div className="container quote-banner"><div><p className="section-kicker">Build Your Collection</p><h2>Need a tailored product direction?</h2><p>Tell us your market, channel, target quantity, and customization priorities.</p></div><Link className="btn btn-primary" href="/contact">Request a Product Proposal</Link></div></section>
+        <section className="section band"><div className="container quote-banner"><div><p className="section-kicker">Build Your Collection</p><h2>Need a tailored product direction?</h2><p>Tell us your market, channel, target quantity, packaging, and customization priorities.</p></div><div className="cta-row"><Link className="btn btn-primary" href="/contact">Request a Product Proposal</Link><a className="btn btn-outline" href="/realbaby-product-catalog.pdf">Download Catalog</a></div></div></section>
       </main>
       <SiteFooter />
     </>

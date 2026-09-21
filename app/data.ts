@@ -17,15 +17,16 @@ export const companyProfile = {
   brandName: "Realbaby",
   foundedYear: "2015",
   positioning: "Baby soft play and developmental products OEM/ODM partner",
-  markets: ["Europe", "North America", "Australia"]
+  markets: ["United States", "Canada", "Australia", "United Kingdom", "Europe"]
 };
 
 
 const commonSpecs = [
-  { key: "MOQ", value: "500 pieces for most custom projects; confirmed by design" },
-  { key: "Sampling", value: "Available after artwork, material, and function review" },
-  { key: "Packaging", value: "Private label, hang tag, insert, gift box, and export carton" },
-  { key: "Testing Support", value: "Planned for the product and destination market" }
+  { key: "Typical MOQ", value: "From 500 pieces for many custom soft-product projects; final MOQ is confirmed by design" },
+  { key: "Typical Sampling", value: "10-15 days for standard soft-product sampling; complex development may take longer" },
+  { key: "Typical Production", value: "40-70 days depending on construction, materials, packaging, approvals, and order quantity" },
+  { key: "Packaging", value: "Private label, hang tag, insert, gift box, window box, custom color box, and export carton" },
+  { key: "Testing Support", value: "EN71, ASTM F963, and CPSIA-CPC coordination according to product and destination market" }
 ];
 
 export const products: Product[] = [
@@ -276,8 +277,8 @@ export const playMoments = [
 export const buyerChannels = [
   ["Importers & Distributors", "Coherent assortments, export communication, and documentation support."],
   ["Baby Brands", "OEM/ODM development, private labels, and collection-level storytelling."],
+  ["Education Channels", "Hands-on sensory and learning formats for guided play and early-learning programs."],
   ["Baby Stores", "Shelf-friendly products, gift sets, and clear age or play-moment positioning."],
   ["Retail Chains", "Scalable programs, market-ready packaging, and inspection coordination."],
-  ["E-commerce Sellers", "Distinctive hero products, compact packaging, and content-ready collections."],
-  ["Education Channels", "Hands-on formats for preschool, parent-child, and early-learning programs."]
+  ["E-commerce & Gift Programs", "Photo-friendly, bundle-ready products for marketplaces, DTC, gifting, and subscription boxes."]
 ];
