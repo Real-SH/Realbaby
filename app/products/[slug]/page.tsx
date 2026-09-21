@@ -10,7 +10,7 @@ export function generateStaticParams() { return products.map((product) => ({ slu
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const product = products.find((item) => item.slug === params.slug);
   if (!product) return { title: "Product | Realbaby" };
-  return { title: `${product.name} OEM/ODM`, description: product.summary, openGraph: { title: `${product.name} OEM/ODM`, description: product.summary, images: [{ url: product.image, alt: product.imageAlt }] } };
+  return { title: `${product.name} OEM/ODM`, description: product.summary, alternates: { canonical: `/products/${product.slug}` }, openGraph: { title: `${product.name} OEM/ODM`, description: product.summary, images: [{ url: product.image, alt: product.imageAlt }] } };
 }
 
 export default function ProductDetailPage({ params }: { params: { slug: string } }) {

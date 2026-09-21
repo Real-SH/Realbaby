@@ -6,7 +6,8 @@ import { products, productSeries } from "../data";
 
 export const metadata: Metadata = {
   title: "Baby Soft Play Product Collection",
-  description: "Explore 15 Realbaby OEM/ODM activity gyms, cloth books, quiet books, comfort blankets, plush companions, and interactive soft-play products."
+  description: "Explore 15 Realbaby OEM/ODM activity gyms, cloth books, quiet books, comfort blankets, plush companions, and interactive soft-play products.",
+  alternates: { canonical: "/products" }
 };
 
 export default function ProductsPage() {

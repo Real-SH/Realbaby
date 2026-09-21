@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   },
   description:
     "Realbaby is a baby soft play and developmental products OEM/ODM partner for importers, baby brands, education channels, retailers, and e-commerce buyers.",
-  alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   keywords: [
     "Realbaby",

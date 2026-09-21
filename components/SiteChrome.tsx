@@ -16,6 +16,7 @@ export function SiteHeader() {
             <li><Link href="/#oem">OEM / ODM</Link></li>
             <li><Link href="/#capability">Manufacturing</Link></li>
             <li><Link href="/#quality">Quality</Link></li>
+            <li><Link href="/insights">Insights</Link></li>
             <li><Link href="/about">About</Link></li>
           </ul>
         </nav>
@@ -44,6 +45,7 @@ export function SiteFooter() {
             <Link href="/#oem">OEM / ODM</Link>
             <Link href="/#capability">Manufacturing</Link>
             <Link href="/#quality">Quality & Safety</Link>
+            <Link href="/insights">Buyer Insights</Link>
             <Link href="/about">About Realbaby</Link>
             <a href="/realbaby-product-catalog.pdf">2026 Product Catalog</a>
             <a href="/realbaby-company-profile-2026.pdf">Company Profile</a>

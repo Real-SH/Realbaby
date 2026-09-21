@@ -3,7 +3,8 @@ import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Realbaby handles website inquiries and business contact information."
+  description: "How Realbaby handles website inquiries and business contact information.",
+  alternates: { canonical: "/privacy-policy" }
 };
 
 export default function PrivacyPolicyPage() {

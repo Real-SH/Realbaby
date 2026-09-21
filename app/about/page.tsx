@@ -6,7 +6,8 @@ import { companyProfile } from "../data";
 
 export const metadata: Metadata = {
   title: "About Realbaby",
-  description: "Meet Realbaby, an OEM/ODM partner focused on baby soft play, comfort, sensory, and early-learning products."
+  description: "Meet Realbaby, an OEM/ODM partner focused on baby soft play, comfort, sensory, and early-learning products.",
+  alternates: { canonical: "/about" }
 };
 
 const values = [

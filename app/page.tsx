@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { HomeInquiryForm } from "../components/HomeInquiryForm";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 import { buyerChannels, playMoments, products, productSeries } from "./data";
 import styles from "./home.module.css";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" }
+};
 
 const proofPoints = [
   ["500 pcs+", "typical MOQ for many custom soft-product projects"],
