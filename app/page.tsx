@@ -252,9 +252,9 @@ export default function HomePage() {
               <aside className={styles.auditCard}>
                 <p className={styles.eyebrow}>AUDIT-READY SUPPORT</p>
                 <h3>Documentation without overclaiming.</h3>
-                <p>Audit and compliance availability varies by manufacturing partner, product construction, and buyer program. We confirm the applicable scope before quotation.</p>
+                <p>Audit and compliance availability varies by manufacturing partner, product construction, and buyer program. We confirm the applicable scope before quotation. Sensitive operational details are redacted in public previews.</p>
                 <div>
-                  <Image src="/images/compliance/costco-audit.webp" alt="Representative Costco audit document" width={1188} height={1107} />
+                  <Image src="/images/compliance/costco-audit.webp" alt="Redacted representative Costco audit document" width={1188} height={1107} />
                   <Image src="/images/compliance/sedex-report.webp" alt="Representative Sedex report document" width={888} height={1170} />
                 </div>
               </aside>
