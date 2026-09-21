@@ -269,13 +269,6 @@
 
 
 
-.capabilityMap { margin-top: 32px; }
-.capabilityMap :global(.map-card) { overflow: hidden; border: 1px solid #eaded6; border-radius: 24px; background: #fff; box-shadow: 0 20px 55px rgba(82, 48, 32, .1); }
-.capabilityMap :global(.map-card-header),
-.capabilityMap :global(.map-card-actions) { padding-inline: 28px; }
-.capabilityMap :global(.map-card-header) { padding-top: 24px; }
-.capabilityMap :global(.map-frame-wrap) { margin: 0 28px; border-radius: 16px; }
-.capabilityMap :global(.map-card-actions) { padding-bottom: 24px; }
 .faqSection { padding: 112px 0; background: #fff; }
 .faqLayout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 76px; align-items: start; }
 .faqList { display: grid; gap: 10px; }
@@ -287,8 +280,4 @@
 @media (max-width: 860px) {
   .faqSection { padding: 76px 0; }
   .faqLayout { grid-template-columns: 1fr; gap: 36px; }
-}
-@media (max-width: 620px) {
-  .capabilityMap :global(.map-card-header), .capabilityMap :global(.map-card-actions) { padding-inline: 18px; }
-  .capabilityMap :global(.map-frame-wrap) { margin-inline: 18px; }
 }

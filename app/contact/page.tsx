@@ -101,7 +101,7 @@ export default function ContactPage() {
             <p className={styles.intro}>Share your product direction, market, channel, and expected quantity. Our team will review the request and reply with practical next steps.</p>
           </div>
           <div className={styles.directContact}>
-            <div><strong>Prefer direct contact?</strong><span>Monday to Friday · Shanghai, China</span></div>
+            <div><strong>Prefer direct contact?</strong><span>Monday to Friday · B2B inquiries welcome</span></div>
             <a href="mailto:real@realbaby.cn">real@realbaby.cn</a>
             <a href="https://wa.me/8617317800686" target="_blank" rel="noreferrer">WhatsApp +86 173 1780 0686</a>
           </div>

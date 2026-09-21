@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HomeInquiryForm } from "../components/HomeInquiryForm";
-import { LocationMap } from "../components/LocationMap";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
-import { buyerChannels, companyLocation, playMoments, products, productSeries } from "./data";
+import { buyerChannels, playMoments, products, productSeries } from "./data";
 import styles from "./home.module.css";
 
 const proofPoints = [
@@ -67,7 +66,7 @@ export default function HomePage() {
         <section className={styles.hero} id="top">
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>OEM / ODM PARTNER · SHANGHAI</p>
+              <p className={styles.eyebrow}>OEM / ODM DEVELOPMENT PARTNER</p>
               <h1>Soft play made for <span>real childhood.</span></h1>
               <p className={styles.slogan}>Real play. Real growth.</p>
               <p className={styles.heroLead}>
@@ -231,9 +230,6 @@ export default function HomePage() {
                 <div className={styles.materialTags}><span>Soft textiles</span><span>Embroidery</span><span>Private label</span><span>Export packing</span></div>
               </div>
             </div>
-            <div className={styles.capabilityMap}>
-              <LocationMap address={companyLocation.address} viewUrl={companyLocation.googleMapsUrl} title="Realbaby · Shanghai, China" zoom={10} />
-            </div>
           </div>
         </section>
 
@@ -268,7 +264,7 @@ export default function HomePage() {
             <div>
               <p className={styles.eyebrow}>BEHIND REALBABY</p>
               <h2>Real people. Real passion. Real dedication.</h2>
-              <p>Founded in 2017, Realbaby focuses on baby soft play and developmental products for international buyers. Our work connects product thinking, commercial clarity, and reliable follow-through.</p>
+              <p>Founded in 2015, Realbaby focuses on baby soft play and developmental products for international buyers. Our work connects product thinking, commercial clarity, and reliable follow-through.</p>
               <blockquote>“We are not here to make children grow faster. We are here to help them grow more naturally.”</blockquote>
               <Link className={styles.arrowLink} href="/about">Meet Realbaby <span>↗</span></Link>
             </div>
@@ -291,7 +287,6 @@ export default function HomePage() {
               <div className={styles.contactFacts}>
                 <a href="mailto:real@realbaby.cn">real@realbaby.cn</a>
                 <a href="https://wa.me/8617317800686">WhatsApp +86 173 1780 0686</a>
-                <span>Shanghai, China</span>
               </div>
             </div>
             <HomeInquiryForm />

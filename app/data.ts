@@ -15,15 +15,11 @@ export type Product = {
 
 export const companyProfile = {
   brandName: "Realbaby",
-  foundedYear: "2017",
+  foundedYear: "2015",
   positioning: "Baby soft play and developmental products OEM/ODM partner",
   markets: ["Europe", "North America", "Australia"]
 };
 
-export const companyLocation = {
-  address: "Shanghai, China",
-  googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Shanghai%2C%20China"
-};
 
 const commonSpecs = [
   { key: "MOQ", value: "500 pieces for most custom projects; confirmed by design" },

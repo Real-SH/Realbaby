@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "OEM baby soft toys",
     "ODM developmental baby products",
     "comfort blanket manufacturer",
-    "baby product OEM ODM China"
+    "baby product OEM ODM supplier"
   ],
   icons: { icon: "/favicon-512.png", apple: "/favicon-512.png" },
   openGraph: {
@@ -41,13 +41,8 @@ const organizationSchema = {
   name: "Realbaby",
   url: "https://www.realbabytoy.com",
   logo: "https://www.realbabytoy.com/logo-primary.png",
-  foundingDate: "2017",
+  foundingDate: "2015",
   email: "real@realbaby.cn",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Shanghai",
-    addressCountry: "CN"
-  },
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",

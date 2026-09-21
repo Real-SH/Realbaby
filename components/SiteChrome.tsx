@@ -49,7 +49,6 @@ export function SiteFooter() {
             <p><strong>Build your collection</strong></p>
             <p><a href="mailto:real@realbaby.cn">real@realbaby.cn</a></p>
             <p><a href="https://wa.me/8617317800686" target="_blank" rel="noreferrer">WhatsApp +86 173 1780 0686</a></p>
-            <p>Shanghai, China</p>
             <Link className="btn btn-primary" href="/contact">Start a Project</Link>
           </div>
         </div>
