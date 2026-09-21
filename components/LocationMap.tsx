@@ -18,9 +18,8 @@ export function LocationMap({
   viewUrl
 }: LocationMapProps) {
   const query = encodeURIComponent(address);
-  const hasApiKey = Boolean(apiKey);
-  const src = hasApiKey
-    ? `https://www.google.com/maps/embed/v1/place?key=${encodeURIComponent(apiKey || "")}&q=${query}&zoom=${zoom}`
+  const src = apiKey
+    ? `https://www.google.com/maps/embed/v1/place?key=${encodeURIComponent(apiKey)}&q=${query}&zoom=${zoom}`
     : `https://www.google.com/maps?q=${query}&z=${zoom}&output=embed`;
   const openUrl = viewUrl || `https://www.google.com/maps/search/?api=1&query=${query}`;
 
@@ -44,12 +43,6 @@ export function LocationMap({
         <a className="btn btn-outline map-nav-btn" href={openUrl} target="_blank" rel="noreferrer">
           {viewOnMapsLabel}
         </a>
-        {!hasApiKey ? (
-          <p className="map-card-note">
-            Tip: Set <code>NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY</code> in <code>.env.local</code>
-            to use the official Google Maps Embed API endpoint.
-          </p>
-        ) : null}
       </div>
     </section>
   );

@@ -197,3 +197,37 @@
     grid-template-columns: 1fr;
   }
 }
+
+.directContact {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  border: 1px solid #ffd6dc;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  padding: 16px 18px;
+}
+
+.directContact div {
+  display: grid;
+  gap: 4px;
+}
+
+.directContact span {
+  color: #6c7280;
+  font-size: 0.84rem;
+}
+
+.directContact a {
+  color: #b3000e;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .directContact {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

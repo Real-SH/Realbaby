@@ -1,43 +1,71 @@
+import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
 import { products } from "../data";
+
+export const metadata: Metadata = {
+  title: "Baby Soft Play Product Lines",
+  description:
+    "Explore Realbaby OEM/ODM baby activity gyms, soft quiet books, comfort blankets, plush soothers, interactive play concepts, and retail packaging."
+};
 
 export default function ProductsPage() {
   return (
-    <main style={{ padding: "64px 24px", maxWidth: 1080, margin: "0 auto" }}>
-      <h1 style={{ marginBottom: 10 }}>Products</h1>
-      <p style={{ maxWidth: 740, color: "#4a4a4a" }}>
-        Explore our core product categories for global B2B buyers. Each product line supports
-        OEM/ODM collaboration and scalable sourcing communication.
-      </p>
-      <section
-        style={{
-          marginTop: 24,
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-          gap: 16
-        }}
-      >
-        {products.map((product) => (
-          <article
-            key={product.slug}
-            style={{
-              border: "1px solid #ffd6dc",
-              borderRadius: 12,
-              padding: 18,
-              background: "#fff"
-            }}
-          >
-            <p style={{ margin: 0, fontSize: 13, color: "#e60012", fontWeight: 700 }}>
-              {product.category}
-            </p>
-            <h2 style={{ fontSize: 24, margin: "8px 0 8px" }}>{product.name}</h2>
-            <p style={{ marginTop: 0 }}>{product.summary}</p>
-            <Link href={`/products/${product.slug}`} style={{ color: "#e60012", fontWeight: 700 }}>
-              View details
-            </Link>
-          </article>
-        ))}
-      </section>
-    </main>
+    <>
+      <SiteHeader />
+      <main className="inner-page">
+        <section className="inner-hero">
+          <div className="container inner-hero-grid">
+            <div>
+              <p className="section-kicker">Realbaby Product Architecture</p>
+              <h1>Baby soft play collections built for B2B growth.</h1>
+              <p className="inner-lead">
+                Start with a proven product direction, then adapt materials, color, character,
+                function, labeling, and packaging to your market.
+              </p>
+            </div>
+            <div className="fact-panel">
+              <strong>OEM / ODM</strong>
+              <span>Sample development</span>
+              <span>Private-label packaging</span>
+              <span>Market-specific compliance support</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container product-catalog-grid">
+            {products.map((product) => (
+              <article className="catalog-card" key={product.slug}>
+                <Link className="catalog-card-image" href={`/products/${product.slug}`}>
+                  <Image src={product.image} alt={product.imageAlt} width={900} height={1125} />
+                </Link>
+                <div className="catalog-card-body">
+                  <p className="product-category">{product.category}</p>
+                  <h2>{product.name}</h2>
+                  <p>{product.summary}</p>
+                  <Link className="text-link" href={`/products/${product.slug}`}>
+                    Explore product line <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section band">
+          <div className="container quote-banner">
+            <div>
+              <p className="section-kicker">Build Your Collection</p>
+              <h2>Need a tailored product direction?</h2>
+              <p>Tell us your market, channel, target quantity, and customization priorities.</p>
+            </div>
+            <Link className="btn btn-primary" href="/contact">Request a Product Proposal</Link>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
   );
 }

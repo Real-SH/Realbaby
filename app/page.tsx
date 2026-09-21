@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useMemo, useRef, useState } from "react";
+import { LocationMap } from "../components/LocationMap";
+import { companyLocation } from "./data";
 
 type ProductCard = {
   title: string;
@@ -16,43 +18,43 @@ type MegaItem = ProductCard & {
 
 const megaItems: MegaItem[] = [
   {
-    title: "2-in-1 Bear Activity Nest",
-    text: "Ultra-soft comfort with detachable arches and sensory toys.",
-    detail: "First Play",
+    title: "Baby Activity Gyms",
+    text: "Soft play mats, arches, hanging toys, tummy-time details, and retail packaging.",
+    detail: "Developmental Play",
     image: "/mega/p01.png",
     alt: "Realbaby 2-in-1 Bear Activity Nest"
   },
   {
-    title: "Space Explorer Activity Gym",
-    text: "High-contrast visual play with interactive hanging toys.",
-    detail: "First Play",
+    title: "High-Contrast Play Mats",
+    text: "Visual discovery concepts for early-stage infant play and sensory routines.",
+    detail: "Infant Visual Play",
     image: "/mega/p02.png",
     alt: "Realbaby Space Explorer Activity Gym"
   },
   {
-    title: "Dream Bunny Activity Gym",
-    text: "Nursery-ready pastel style for cuddly discovery moments.",
-    detail: "First Play",
+    title: "Comfort Blankets",
+    text: "Soft character comfort products for baby stores, gift sets, and nursery ranges.",
+    detail: "Soothing Products",
     image: "/mega/p03.png",
     alt: "Realbaby Dream Bunny Activity Gym"
   },
   {
-    title: "My Quiet Book",
-    text: "Hands-on learning pages built for little hands.",
-    detail: "Learning Play",
+    title: "Soft Quiet Books",
+    text: "Cloth learning books with custom themes, page structures, and safe details.",
+    detail: "Soft Learning",
     image: "/mega/p06.png",
     alt: "Realbaby My Quiet Book"
   },
   {
-    title: "Cuddle Shirt",
-    text: "Wearable sensory interaction for parent-child routines.",
-    detail: "Smart Play",
+    title: "Interactive Play Concepts",
+    text: "Wearable, sensory, and smart-play directions for differentiated collections.",
+    detail: "Innovation",
     image: "/mega/p13.png",
     alt: "Realbaby Cuddle Shirt"
   },
   {
-    title: "Quality & Packaging",
-    text: "Production workflow, audit support, and branded packaging.",
+    title: "Retail Packaging Support",
+    text: "Hang tags, inserts, gift boxes, display-ready packs, and export cartons.",
     detail: "Capability",
     image: "/mega/p15.png",
     alt: "Realbaby quality and packaging support"
@@ -61,38 +63,38 @@ const megaItems: MegaItem[] = [
 
 const featuredProducts: ProductCard[] = [
   {
-    title: "Bunny Plush",
-    text: "Ultra-soft feel and gift-ready comfort character.",
+    title: "Baby Activity Gym Programs",
+    text: "OEM/ODM play gyms with arches, mat shapes, toy attachments, fabrics, and packaging adapted for retail programs.",
     image: "/mega/p04.png",
     alt: "Realbaby Bunny Plush product presentation"
   },
   {
-    title: "Dino Comfort Blanket",
-    text: "Calm cuddle design for bedtime and daily routines.",
+    title: "Comfort Blanket Collections",
+    text: "Character comfort blankets built for gift channels, baby stores, subscription boxes, and private-label ranges.",
     image: "/mega/p10.png",
     alt: "Realbaby Dino Comfort Blanket product presentation"
   },
   {
-    title: "Sunflower Comfort Blanket",
-    text: "Cheerful color and lightweight comfort for little ones.",
+    title: "Soft Quiet Books",
+    text: "Hands-on cloth books with custom educational themes, stitching details, and market-specific content.",
     image: "/mega/p12.png",
     alt: "Realbaby Sunflower Comfort Blanket product presentation"
   },
   {
-    title: "Crocodile Comfort Blanket",
-    text: "Friendly character comfort for cuddles and travel.",
+    title: "Plush Soothers & Soft Characters",
+    text: "Baby-safe plush companions and soothing products with fabric, embroidery, and label customization.",
     image: "/mega/p09.png",
     alt: "Realbaby Crocodile Comfort Blanket product presentation"
   },
   {
-    title: "Puppy Comfort Blanket",
-    text: "Loyal little comfort friend for calm everyday moments.",
+    title: "Wearable / Parent-Child Play",
+    text: "Soft wearable interaction concepts for brands that want a more differentiated baby product line.",
     image: "/mega/p11.png",
     alt: "Realbaby Puppy Comfort Blanket product presentation"
   },
   {
-    title: "Butterfly Comfort Blanket",
-    text: "Bright sensory colors with soft cuddle companionship.",
+    title: "Gift-Ready Baby Sets",
+    text: "Collection planning across product, packaging, insert cards, labels, and buyer presentation assets.",
     image: "/mega/p08.png",
     alt: "Realbaby Butterfly Comfort Blanket product presentation"
   }
@@ -100,20 +102,26 @@ const featuredProducts: ProductCard[] = [
 
 const seriesCards: ProductCard[] = [
   {
-    title: "First Play",
-    text: "Sensory, safe, and soft activity-focused products.",
+    title: "Developmental Activity Play",
+    text: "Activity gyms, play mats, arches, and hanging toys designed around early sensory and motor development.",
     image: "/mega/p03.png",
     alt: "Realbaby First Play baby activity gym series"
   },
   {
-    title: "Learning Play",
-    text: "Hands-on materials for cognitive and discovery moments.",
+    title: "Soft Learning & Quiet Books",
+    text: "Cloth books and tactile learning pages that help buyers build education-focused baby collections.",
     image: "/mega/p06.png",
     alt: "Realbaby Learning Play quiet book series"
   },
   {
+    title: "Comfort & Soothing Companions",
+    text: "Comfort blankets, plush soothers, and soft characters for calm routines, gift sets, and nursery channels.",
+    image: "/mega/p10.png",
+    alt: "Realbaby comfort blanket and plush soother series"
+  },
+  {
     title: "Smart / Wearable Play",
-    text: "Interactive products for parent-child learning scenes.",
+    text: "Interactive soft product concepts for brands exploring parent-child engagement beyond generic plush.",
     image: "/mega/p13.png",
     alt: "Realbaby Smart Wearable Play cuddle shirt series"
   }
@@ -121,44 +129,95 @@ const seriesCards: ProductCard[] = [
 
 const capabilityCards: ProductCard[] = [
   {
-    title: "Audit & Compliance Support",
-    text: "EN71 / ASTM / CPC and audit-ready documentation support.",
-    image: "/mega/p15.png",
-    alt: "Realbaby production and quality assurance workflow"
-  },
-  {
-    title: "Materials & Packaging",
-    text: "Eco-focused fabrics, detail finishing, and custom pack solutions.",
+    title: "Development From Sketch to Sample",
+    text: "Product direction, materials, structure, sample revision, and buyer-ready presentation support.",
     image: "/mega/p14.png",
     alt: "Realbaby materials details and packaging support"
   },
   {
-    title: "Custom Packaging Support",
-    text: "Gift box, hang tag, shopping bag, and insert solutions.",
+    title: "Compliance Documentation Support",
+    text: "EN71, ASTM, CPC-related testing documentation can be prepared according to product and market requirements.",
+    image: "/mega/p15.png",
+    alt: "Realbaby production and quality assurance workflow"
+  },
+  {
+    title: "Retail-Ready Packaging",
+    text: "Gift boxes, hang tags, inserts, display packaging, and export cartons for private-label baby programs.",
     image: "/mega/p17.png",
     alt: "Realbaby brand packaging and retail presentation"
   }
 ];
 
+const advantageCards = [
+  {
+    title: "Focused baby product development",
+    text: "A clear specialization in soft play, comfort, learning, and developmental products for babies and toddlers."
+  },
+  {
+    title: "B2B-ready OEM / ODM support",
+    text: "Product structure, materials, labels, packaging, sampling, and buyer communication are planned as one practical workflow."
+  },
+  {
+    title: "Verifiable quality communication",
+    text: "Testing and compliance information is shared according to the actual product, destination market, and available documentation."
+  }
+];
+
+const processSteps = [
+  "Share idea, target market, and quantity",
+  "Confirm product structure, materials, and packaging direction",
+  "Develop sample and revise details",
+  "Prepare compliance and quality documentation as required",
+  "Move to production, inspection, packing, and shipment support"
+];
+
 const buyerScenarios = [
-  "Importers",
-  "Wholesalers",
+  "Baby Product Importers",
+  "Private-Label Baby Brands",
   "Supermarkets",
   "Baby Stores",
-  "E-commerce Brands",
-  "Early Education Channels"
+  "E-commerce & DTC Brands",
+  "Early Education Channels",
+  "Gift & Subscription Boxes"
+];
+
+const faqItems = [
+  {
+    question: "What is the MOQ for custom baby products?",
+    answer: "MOQ depends on product structure, materials, packaging, and customization depth. Share your target quantity and we will recommend a practical development route."
+  },
+  {
+    question: "Can you develop samples before bulk production?",
+    answer: "Yes. We confirm the concept, materials, artwork, and packaging direction before sampling, then revise key details with your team."
+  },
+  {
+    question: "How long does sampling and production take?",
+    answer: "Timing varies by product complexity and approval rounds. A project-specific schedule is provided after requirements are reviewed."
+  },
+  {
+    question: "Do you support private labels and custom packaging?",
+    answer: "Yes. We support labels, embroidery, colors, hang tags, inserts, gift boxes, display packs, and export cartons according to project needs."
+  },
+  {
+    question: "Can you support EN71, ASTM, or CPC documentation?",
+    answer: "Testing and documentation support is planned according to the product and destination market. Only authentic, project-relevant files are shared."
+  }
 ];
 
 function track(eventName: string, payload?: Record<string, string>) {
   if (typeof window === "undefined") return;
-  // Placeholder for future ad/SEO attribution events.
-  console.log("[tracking]", { event: eventName, ...payload });
+  const analyticsWindow = window as Window & {
+    dataLayer?: Array<Record<string, unknown>>;
+  };
+  analyticsWindow.dataLayer?.push({ event: eventName, ...payload });
 }
 
 export default function HomePage() {
   const [megaOpen, setMegaOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formError, setFormError] = useState("");
+  const [formFeedback, setFormFeedback] = useState("");
+  const startedAtRef = useRef(Date.now());
 
   const utm = useMemo(() => {
     if (typeof window === "undefined") return "";
@@ -172,23 +231,54 @@ export default function HomePage() {
       .join("&");
   }, []);
 
-  function submitInquiry(event: FormEvent<HTMLFormElement>) {
+  async function submitInquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const requiredFields = ["name", "email", "country", "buyerType", "requirement", "message"];
     const missing = requiredFields.some((field) => !String(formData.get(field) || "").trim());
 
     if (missing) {
       setFormError("Please complete all required fields before submission.");
+      setSubmitStatus("error");
       return;
     }
 
     setFormError("");
-    setSubmitted(true);
-    track("form_submit", { source: "home_inquiry_form", utm });
-    event.currentTarget.reset();
-  }
+    setFormFeedback("Submitting your inquiry...");
+    setSubmitStatus("submitting");
 
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("whatsapp"),
+          country: formData.get("country"),
+          buyerType: formData.get("buyerType"),
+          productRequirement: formData.get("requirement"),
+          quantity: formData.get("quantity"),
+          message: formData.get("message"),
+          utm,
+          sourcePath: "/",
+          startedAt: startedAtRef.current
+        })
+      });
+      const result = (await response.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
+      if (!response.ok || !result?.ok) throw new Error(result?.message || "Submission failed. Please try again.");
+
+      setSubmitStatus("success");
+      setFormFeedback(result.message || "Thank you. Our sales team will contact you soon.");
+      track("form_submit", { source: "home_inquiry_form", utm });
+      form.reset();
+      startedAtRef.current = Date.now();
+    } catch (error) {
+      setSubmitStatus("error");
+      setFormFeedback(error instanceof Error ? error.message : "Submission failed. Please email real@realbaby.cn.");
+    }
+  }
   return (
     <main>
       <header className="site-header">
@@ -220,14 +310,14 @@ export default function HomePage() {
                 <div className="mega-panel" id="mega-panel" aria-label="Product mega menu">
                   <div className="mega-top">
                     <div>
-                      <h3>Real play. Real growth.</h3>
-                      <p>Buyer-ready product directions from soft play to packaging support.</p>
+                      <h3>Baby soft play sourcing</h3>
+                      <p>Focused product directions from developmental play to retail packaging.</p>
                     </div>
                     <div className="mega-pill-row">
+                      <span>Activity Gyms</span>
+                      <span>Quiet Books</span>
+                      <span>Comfort Blankets</span>
                       <span>OEM / ODM</span>
-                      <span>Materials Ready</span>
-                      <span>QC Workflow</span>
-                      <span>Export Packaging</span>
                     </div>
                   </div>
                   <div className="mega-grid">
@@ -252,8 +342,8 @@ export default function HomePage() {
                       />
                       <h4>Materials, Details & Packaging</h4>
                       <p>
-                        Fabric selection, embroidery, hang tags, gift boxes, and export-ready
-                        retail presentation can be adapted to your collection.
+                        Fabric selection, embroidery, labels, hang tags, gift boxes, and
+                        export-ready retail presentation can be adapted to your baby collection.
                       </p>
                       <div className="mega-actions">
                         <a className="btn btn-primary" href="#contact">
@@ -284,15 +374,15 @@ export default function HomePage() {
       <section className="hero section" id="top">
         <div className="container hero-grid">
           <div className="hero-copy-wrap">
-            <p className="eyebrow">Source Manufacturer | OEM & ODM</p>
+            <p className="eyebrow">Baby Soft Play OEM / ODM Partner</p>
             <h1>
-              Made for real childhood.
-              <span>Real play. Real growth.</span>
+              Baby soft play products for real retail programs.
+              <span>From activity gyms to quiet books.</span>
             </h1>
             <p className="hero-copy">
-              Realbaby develops practical and premium baby products for importers,
-              distributors, and e-commerce brands. We combine emotional design with scalable
-              manufacturing and export-ready quality workflows.
+              Realbaby helps importers, baby brands, supermarkets, and e-commerce sellers develop
+              soft developmental products with practical customization, retail packaging, and
+              export-ready quality workflows.
             </p>
             <div className="cta-row">
               <a
@@ -311,9 +401,9 @@ export default function HomePage() {
               </a>
             </div>
             <div className="hero-proof">
-              <span>OEM / ODM Support</span>
-              <span>Quality Workflow</span>
-              <span>Export Packaging</span>
+              <span>Founded 2017</span>
+              <span>OEM / ODM Baby Soft Goods</span>
+              <span>EN71 / ASTM / CPC Support</span>
             </div>
           </div>
           <div className="hero-visual">
@@ -332,10 +422,10 @@ export default function HomePage() {
         <div className="container">
           <div className="section-heading">
             <span>Featured Collection</span>
-            <h2>Product presentations adapted from your latest collection visuals</h2>
+            <h2>Core product directions for baby sourcing teams</h2>
             <p>
-              A stronger product area for B2B buyers, ad landing pages, and SEO-readable product
-              discovery.
+              Explore a focused range for sourcing teams:
+              soft developmental play, comfort, learning, and retail-ready baby collections.
             </p>
           </div>
           <div className="cards-3 cards-collection">
@@ -356,7 +446,7 @@ export default function HomePage() {
         <div className="container">
           <div className="section-heading compact">
             <span>Product Series Architecture</span>
-            <h2>Three clear directions for buyer sourcing</h2>
+            <h2>A focused category architecture buyers can understand quickly</h2>
           </div>
           <div className="cards-3">
             {seriesCards.map((series) => (
@@ -376,10 +466,11 @@ export default function HomePage() {
         <div className="container">
           <div className="section-heading">
             <span>Production & Quality Capability</span>
-            <h2>From product concept to retail-ready packaging</h2>
+            <h2>From baby product concept to retail-ready packaging</h2>
             <p>
-              Realbaby supports sampling, material sourcing, embroidery, sewing, quality checks,
-              packaging, and delivery for market-ready collections.
+              Realbaby supports product planning, sampling, material sourcing, embroidery,
+              sewing, quality checks, packaging, and delivery coordination for market-ready baby
+              collections.
             </p>
           </div>
           <div className="cards-3">
@@ -392,6 +483,9 @@ export default function HomePage() {
                 </div>
               </article>
             ))}
+          </div>
+          <div className="capability-map">
+            <LocationMap title="Realbaby Business Location" address={companyLocation.address} viewUrl={companyLocation.googleMapsUrl} zoom={10} />
           </div>
         </div>
       </section>
@@ -410,15 +504,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section band" id="advantages">
+        <div className="container">
+          <div className="section-heading">
+            <span>Positioning Advantage</span>
+              <h2>A sourcing partner built around clarity</h2>
+              <p>
+                Product focus, practical development steps, transparent customization, and
+                verifiable quality support help buying teams move from idea to quotation faster.
+              </p>
+          </div>
+          <div className="advantage-grid">
+            {advantageCards.map((item) => (
+              <article className="advantage-card" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="process">
+        <div className="container process-grid">
+          <div>
+            <span className="section-kicker">OEM / ODM Development Process</span>
+            <h2>A practical path from idea to shipment</h2>
+            <p>
+              Buyers know what information to send, what our team will confirm, and how a project
+              moves from concept and sampling through production and delivery.
+            </p>
+          </div>
+          <ol className="process-list">
+            {processSteps.map((step, index) => (
+              <li key={step}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p>{step}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <section className="section" id="compliance">
         <div className="container">
           <div className="section-heading">
             <span>Safety & Compliance</span>
-            <h2>You can trust the documents behind the collection</h2>
+            <h2>Keep claims verifiable and buyer-friendly</h2>
             <p>
-              Selected Realbaby products can be supported with EN71, ASTM, and CPC-related
-              testing documentation. Factory audit and compliance files can be shared according to
-              buyer requirements.
+              Selected Realbaby products can be supported with EN71, ASTM, and CPC-related testing
+              documentation. Factory audit and compliance files can be shared according to buyer
+              requirements and actual project scope.
             </p>
           </div>
           <div className="trust-grid">
@@ -470,17 +606,37 @@ export default function HomePage() {
             <span className="section-kicker">Behind Realbaby</span>
             <h2>Build Your Realbaby Collection</h2>
             <p>
-              Real people, real passion, and real dedication. Our team supports design, sampling,
-              production, quality, and export coordination for your collection growth.
+              Real people, practical product development, and reliable follow-up. Our team supports
+              design, sampling, production, quality, and export coordination for your baby soft
+              product collection.
             </p>
             <ul className="contact-list">
               <li><strong>Website:</strong> realbabytoy.com</li>
-              <li><strong>Email:</strong> real@realbaby.cn</li>
-              <li><strong>WhatsApp:</strong> +86 17317800686</li>
+              <li><strong>Email:</strong> <a href="mailto:real@realbaby.cn">real@realbaby.cn</a></li>
+              <li><strong>WhatsApp:</strong> <a href="https://wa.me/8617317800686" target="_blank" rel="noreferrer">+86 173 1780 0686</a></li>
               <li><strong>Contact:</strong> Karen</li>
               <li><strong>Location:</strong> Shanghai</li>
             </ul>
           </article>
+        </div>
+      </section>
+
+      <section className="section faq-section" id="faq">
+        <div className="container faq-grid">
+          <div>
+            <span className="section-kicker">Buyer FAQ</span>
+            <h2>Practical answers before you request a quote</h2>
+            <p>Final terms are confirmed against the actual product, market, and order scope.</p>
+            <a className="btn btn-outline" href="#contact">Ask a Project Question</a>
+          </div>
+          <div className="faq-list">
+            {faqItems.map((item) => (
+              <details key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -490,8 +646,8 @@ export default function HomePage() {
             <span className="section-kicker">Request a Product Proposal</span>
             <h2>Tell us your target market and collection plan</h2>
             <p>
-              Share your product direction, buyer type, and expected market. We will reply with a
-              practical sourcing plan and quotation support.
+              Share your product direction, buyer type, expected quantity, and target market. We
+              will reply with a practical sourcing plan and quotation support.
             </p>
             <a className="catalog-link" href="/realbaby-product-catalog.pdf">
               Download Realbaby Catalog
@@ -516,7 +672,7 @@ export default function HomePage() {
             </label>
             <label className="full-width">
               Product Requirement *
-              <input name="requirement" type="text" required />
+              <input name="requirement" type="text" placeholder="Activity gym, quiet book, comfort blanket..." required />
             </label>
             <label>
               WhatsApp
@@ -531,11 +687,15 @@ export default function HomePage() {
               <textarea name="message" rows={5} required />
             </label>
             <input type="hidden" name="utm" value={utm} />
-            <button type="submit" className="btn btn-primary">
-              Get a Quote
+            <button type="submit" className="btn btn-primary" disabled={submitStatus === "submitting"}>
+              {submitStatus === "submitting" ? "Submitting..." : "Get a Quote"}
             </button>
-            {formError ? <p className="error">{formError}</p> : null}
-            {submitted ? <p className="success">Thank you. Our sales team will contact you soon.</p> : null}
+            {formError ? <p className="error" role="alert">{formError}</p> : null}
+            {formFeedback ? (
+              <p className={submitStatus === "success" ? "success" : submitStatus === "error" ? "error" : ""} aria-live="polite">
+                {formFeedback}
+              </p>
+            ) : null}
           </form>
         </div>
       </section>
@@ -555,9 +715,8 @@ export default function HomePage() {
             <a href="#contact">Contact</a>
           </nav>
           <div>
-            <p>Real International Trading(Shanghai) Co., Ltd</p>
-            <p>Email: real@realbaby.cn</p>
-            <p>WhatsApp: +86 17317800686</p>
+            <p>Email: <a href="mailto:real@realbaby.cn">real@realbaby.cn</a></p>
+            <p>WhatsApp: <a href="https://wa.me/8617317800686" target="_blank" rel="noreferrer">+86 173 1780 0686</a></p>
           </div>
         </div>
       </footer>

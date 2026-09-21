@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { products } from "./data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://www.realbabyglobal.com";
+  const base = "https://www.realbabytoy.com";
   const now = new Date();
 
   return [
