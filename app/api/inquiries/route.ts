@@ -164,9 +164,9 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (!name || !email || !country || !productRequirement || !message) {
+  if (!name || !email || !country || !buyerType || !productRequirement || !message) {
     return errorResponse(
-      "Please complete Name, Email, Country, Product Requirement, and Message."
+      "Please complete Name, Email, Country, Buyer Type, Product Requirement, and Message."
     );
   }
   if (!isValidEmail(email)) return errorResponse("Please enter a valid email address.");

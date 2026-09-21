@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="380" viewBox="0 0 1160 380">
+    
+    
+
+    <g>
+      <circle cx="170" cy="185" r="130" fill="#E60012"/>
+      <text x="170" y="179" text-anchor="middle"
+            font-family="'Nunito Sans', 'Avenir Next', 'Arial Rounded MT Bold', 'Inter', Arial, sans-serif" font-weight="900" font-size="81.9"
+            letter-spacing="-4" fill="#FFFFFF">real</text>
+      <path d="M 115.4 229.2 Q 170 268.2 224.6 229.2"
+            fill="none" stroke="#FFFFFF" stroke-width="12.35" stroke-linecap="round"/>
+    </g>
+    
+<text x="350" y="225" font-family="'Nunito Sans', 'Avenir Next', 'Arial Rounded MT Bold', 'Inter', Arial, sans-serif" font-size="165" font-weight="900" letter-spacing="-7" fill="#E60012">realbaby</text>
+
+    </svg>

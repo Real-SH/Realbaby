@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+    
+    
+    <g>
+      <circle cx="512" cy="512" r="420" fill="#E60012"/>
+      <text x="512" y="506" text-anchor="middle"
+            font-family="'Nunito Sans', 'Avenir Next', 'Arial Rounded MT Bold', 'Inter', Arial, sans-serif" font-weight="900" font-size="264.6"
+            letter-spacing="-4" fill="#FFFFFF">real</text>
+      <path d="M 335.6 654.8 Q 512 780.8 688.4 654.8"
+            fill="none" stroke="#FFFFFF" stroke-width="39.9" stroke-linecap="round"/>
+    </g>
+    
+    </svg>

@@ -1,725 +1,305 @@
-"use client";
-
 import Image from "next/image";
-import { FormEvent, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { HomeInquiryForm } from "../components/HomeInquiryForm";
 import { LocationMap } from "../components/LocationMap";
-import { companyLocation } from "./data";
+import { SiteFooter, SiteHeader } from "../components/SiteChrome";
+import { buyerChannels, companyLocation, playMoments, products, productSeries } from "./data";
+import styles from "./home.module.css";
 
-type ProductCard = {
-  title: string;
-  text: string;
-  image: string;
-  alt: string;
-};
-
-type MegaItem = ProductCard & {
-  detail: string;
-};
-
-const megaItems: MegaItem[] = [
-  {
-    title: "Baby Activity Gyms",
-    text: "Soft play mats, arches, hanging toys, tummy-time details, and retail packaging.",
-    detail: "Developmental Play",
-    image: "/mega/p01.png",
-    alt: "Realbaby 2-in-1 Bear Activity Nest"
-  },
-  {
-    title: "High-Contrast Play Mats",
-    text: "Visual discovery concepts for early-stage infant play and sensory routines.",
-    detail: "Infant Visual Play",
-    image: "/mega/p02.png",
-    alt: "Realbaby Space Explorer Activity Gym"
-  },
-  {
-    title: "Comfort Blankets",
-    text: "Soft character comfort products for baby stores, gift sets, and nursery ranges.",
-    detail: "Soothing Products",
-    image: "/mega/p03.png",
-    alt: "Realbaby Dream Bunny Activity Gym"
-  },
-  {
-    title: "Soft Quiet Books",
-    text: "Cloth learning books with custom themes, page structures, and safe details.",
-    detail: "Soft Learning",
-    image: "/mega/p06.png",
-    alt: "Realbaby My Quiet Book"
-  },
-  {
-    title: "Interactive Play Concepts",
-    text: "Wearable, sensory, and smart-play directions for differentiated collections.",
-    detail: "Innovation",
-    image: "/mega/p13.png",
-    alt: "Realbaby Cuddle Shirt"
-  },
-  {
-    title: "Retail Packaging Support",
-    text: "Hang tags, inserts, gift boxes, display-ready packs, and export cartons.",
-    detail: "Capability",
-    image: "/mega/p15.png",
-    alt: "Realbaby quality and packaging support"
-  }
+const proofPoints = [
+  ["15", "developed product directions"],
+  ["500 pcs", "typical custom project MOQ"],
+  ["EN71 · ASTM · CPC", "market-specific testing support"]
 ];
 
-const featuredProducts: ProductCard[] = [
-  {
-    title: "Baby Activity Gym Programs",
-    text: "OEM/ODM play gyms with arches, mat shapes, toy attachments, fabrics, and packaging adapted for retail programs.",
-    image: "/mega/p04.png",
-    alt: "Realbaby Bunny Plush product presentation"
-  },
-  {
-    title: "Comfort Blanket Collections",
-    text: "Character comfort blankets built for gift channels, baby stores, subscription boxes, and private-label ranges.",
-    image: "/mega/p10.png",
-    alt: "Realbaby Dino Comfort Blanket product presentation"
-  },
-  {
-    title: "Soft Quiet Books",
-    text: "Hands-on cloth books with custom educational themes, stitching details, and market-specific content.",
-    image: "/mega/p12.png",
-    alt: "Realbaby Sunflower Comfort Blanket product presentation"
-  },
-  {
-    title: "Plush Soothers & Soft Characters",
-    text: "Baby-safe plush companions and soothing products with fabric, embroidery, and label customization.",
-    image: "/mega/p09.png",
-    alt: "Realbaby Crocodile Comfort Blanket product presentation"
-  },
-  {
-    title: "Wearable / Parent-Child Play",
-    text: "Soft wearable interaction concepts for brands that want a more differentiated baby product line.",
-    image: "/mega/p11.png",
-    alt: "Realbaby Puppy Comfort Blanket product presentation"
-  },
-  {
-    title: "Gift-Ready Baby Sets",
-    text: "Collection planning across product, packaging, insert cards, labels, and buyer presentation assets.",
-    image: "/mega/p08.png",
-    alt: "Realbaby Butterfly Comfort Blanket product presentation"
-  }
-];
-
-const seriesCards: ProductCard[] = [
-  {
-    title: "Developmental Activity Play",
-    text: "Activity gyms, play mats, arches, and hanging toys designed around early sensory and motor development.",
-    image: "/mega/p03.png",
-    alt: "Realbaby First Play baby activity gym series"
-  },
-  {
-    title: "Soft Learning & Quiet Books",
-    text: "Cloth books and tactile learning pages that help buyers build education-focused baby collections.",
-    image: "/mega/p06.png",
-    alt: "Realbaby Learning Play quiet book series"
-  },
-  {
-    title: "Comfort & Soothing Companions",
-    text: "Comfort blankets, plush soothers, and soft characters for calm routines, gift sets, and nursery channels.",
-    image: "/mega/p10.png",
-    alt: "Realbaby comfort blanket and plush soother series"
-  },
-  {
-    title: "Smart / Wearable Play",
-    text: "Interactive soft product concepts for brands exploring parent-child engagement beyond generic plush.",
-    image: "/mega/p13.png",
-    alt: "Realbaby Smart Wearable Play cuddle shirt series"
-  }
-];
-
-const capabilityCards: ProductCard[] = [
-  {
-    title: "Development From Sketch to Sample",
-    text: "Product direction, materials, structure, sample revision, and buyer-ready presentation support.",
-    image: "/mega/p14.png",
-    alt: "Realbaby materials details and packaging support"
-  },
-  {
-    title: "Compliance Documentation Support",
-    text: "EN71, ASTM, CPC-related testing documentation can be prepared according to product and market requirements.",
-    image: "/mega/p15.png",
-    alt: "Realbaby production and quality assurance workflow"
-  },
-  {
-    title: "Retail-Ready Packaging",
-    text: "Gift boxes, hang tags, inserts, display packaging, and export cartons for private-label baby programs.",
-    image: "/mega/p17.png",
-    alt: "Realbaby brand packaging and retail presentation"
-  }
-];
-
-const advantageCards = [
-  {
-    title: "Focused baby product development",
-    text: "A clear specialization in soft play, comfort, learning, and developmental products for babies and toddlers."
-  },
-  {
-    title: "B2B-ready OEM / ODM support",
-    text: "Product structure, materials, labels, packaging, sampling, and buyer communication are planned as one practical workflow."
-  },
-  {
-    title: "Verifiable quality communication",
-    text: "Testing and compliance information is shared according to the actual product, destination market, and available documentation."
-  }
+const customCapabilities = [
+  "Existing style selection",
+  "Custom product design",
+  "Fabric and material selection",
+  "Embroidery and printing",
+  "Private label development",
+  "Custom packaging",
+  "Sample development",
+  "Quality inspection",
+  "Export support"
 ];
 
 const processSteps = [
-  "Share idea, target market, and quantity",
-  "Confirm product structure, materials, and packaging direction",
-  "Develop sample and revise details",
-  "Prepare compliance and quality documentation as required",
-  "Move to production, inspection, packing, and shipment support"
+  ["01", "Brief", "Share target market, channel, quantity, and product direction."],
+  ["02", "Design", "Align function, artwork, material, labeling, and packaging."],
+  ["03", "Sample", "Develop and revise a physical sample before bulk approval."],
+  ["04", "Production", "Coordinate production, quality checks, and project documents."],
+  ["05", "Delivery", "Complete packing and export support for the agreed destination."]
 ];
 
-const buyerScenarios = [
-  "Baby Product Importers",
-  "Private-Label Baby Brands",
-  "Supermarkets",
-  "Baby Stores",
-  "E-commerce & DTC Brands",
-  "Early Education Channels",
-  "Gift & Subscription Boxes"
+const complianceDocs = [
+  ["ASTM F963", "/images/compliance/astm.webp"],
+  ["CPC", "/images/compliance/cpc.webp"],
+  ["EN71", "/images/compliance/en71.webp"],
+  ["CE / DoC", "/images/compliance/ce.webp"]
 ];
 
 const faqItems = [
-  {
-    question: "What is the MOQ for custom baby products?",
-    answer: "MOQ depends on product structure, materials, packaging, and customization depth. Share your target quantity and we will recommend a practical development route."
-  },
-  {
-    question: "Can you develop samples before bulk production?",
-    answer: "Yes. We confirm the concept, materials, artwork, and packaging direction before sampling, then revise key details with your team."
-  },
-  {
-    question: "How long does sampling and production take?",
-    answer: "Timing varies by product complexity and approval rounds. A project-specific schedule is provided after requirements are reviewed."
-  },
-  {
-    question: "Do you support private labels and custom packaging?",
-    answer: "Yes. We support labels, embroidery, colors, hang tags, inserts, gift boxes, display packs, and export cartons according to project needs."
-  },
-  {
-    question: "Can you support EN71, ASTM, or CPC documentation?",
-    answer: "Testing and documentation support is planned according to the product and destination market. Only authentic, project-relevant files are shared."
-  }
+  ["What is the MOQ for a custom project?", "The typical MOQ is 500 pieces for most custom projects. The final quantity depends on construction, materials, packaging, and customization depth."],
+  ["Can Realbaby develop a sample before production?", "Yes. We align the brief, artwork, materials, functions, and packaging direction before sampling, then revise agreed details before bulk approval."],
+  ["Which parts of a product can be customized?", "Options can include character design, colors, fabric, activity details, embroidery or printing, labels, instruction cards, gift packaging, and export cartons."],
+  ["Do you support EN71, ASTM, or CPC requirements?", "Testing and documentation support is planned for the actual product and destination market. Representative documents can be reviewed during the project."],
+  ["How long do sampling and bulk production take?", "Timing varies by product complexity, testing needs, and approval rounds. We provide a project-specific schedule after reviewing your requirements."],
+  ["Which buyers do you work with?", "Realbaby works with importers, distributors, baby brands, retail chains, e-commerce sellers, education channels, and gift or subscription programs."]
 ];
 
-function track(eventName: string, payload?: Record<string, string>) {
-  if (typeof window === "undefined") return;
-  const analyticsWindow = window as Window & {
-    dataLayer?: Array<Record<string, unknown>>;
-  };
-  analyticsWindow.dataLayer?.push({ event: eventName, ...payload });
-}
-
 export default function HomePage() {
-  const [megaOpen, setMegaOpen] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [formError, setFormError] = useState("");
-  const [formFeedback, setFormFeedback] = useState("");
-  const startedAtRef = useRef(Date.now());
-
-  const utm = useMemo(() => {
-    if (typeof window === "undefined") return "";
-    const params = new URLSearchParams(window.location.search);
-    return ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"]
-      .map((key) => {
-        const value = params.get(key);
-        return value ? `${key}=${value}` : "";
-      })
-      .filter(Boolean)
-      .join("&");
-  }, []);
-
-  async function submitInquiry(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const requiredFields = ["name", "email", "country", "buyerType", "requirement", "message"];
-    const missing = requiredFields.some((field) => !String(formData.get(field) || "").trim());
-
-    if (missing) {
-      setFormError("Please complete all required fields before submission.");
-      setSubmitStatus("error");
-      return;
-    }
-
-    setFormError("");
-    setFormFeedback("Submitting your inquiry...");
-    setSubmitStatus("submitting");
-
-    try {
-      const response = await fetch("/api/inquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-          phone: formData.get("whatsapp"),
-          country: formData.get("country"),
-          buyerType: formData.get("buyerType"),
-          productRequirement: formData.get("requirement"),
-          quantity: formData.get("quantity"),
-          message: formData.get("message"),
-          utm,
-          sourcePath: "/",
-          startedAt: startedAtRef.current
-        })
-      });
-      const result = (await response.json().catch(() => null)) as { ok?: boolean; message?: string } | null;
-      if (!response.ok || !result?.ok) throw new Error(result?.message || "Submission failed. Please try again.");
-
-      setSubmitStatus("success");
-      setFormFeedback(result.message || "Thank you. Our sales team will contact you soon.");
-      track("form_submit", { source: "home_inquiry_form", utm });
-      form.reset();
-      startedAtRef.current = Date.now();
-    } catch (error) {
-      setSubmitStatus("error");
-      setFormFeedback(error instanceof Error ? error.message : "Submission failed. Please email real@realbaby.cn.");
-    }
-  }
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } }))
+  };
   return (
-    <main>
-      <header className="site-header">
-        <div className="container header-inner">
-          <a className="brand-lockup" href="#top" aria-label="Realbaby home">
-            <Image src="/favicon-512.png" alt="Realbaby icon" width={50} height={50} priority />
-            <span>
-              <strong>realbaby</strong>
-              <em>Real play. Real growth.</em>
-            </span>
-          </a>
-
-          <nav className="main-nav" aria-label="Main navigation">
-            <ul>
-              <li
-                className={`mega-root ${megaOpen ? "open" : ""}`}
-                onMouseEnter={() => setMegaOpen(true)}
-                onMouseLeave={() => setMegaOpen(false)}
-              >
-                <button
-                  className="nav-btn"
-                  type="button"
-                  aria-expanded={megaOpen}
-                  aria-controls="mega-panel"
-                  onClick={() => setMegaOpen((value) => !value)}
-                >
-                  Products
-                </button>
-                <div className="mega-panel" id="mega-panel" aria-label="Product mega menu">
-                  <div className="mega-top">
-                    <div>
-                      <h3>Baby soft play sourcing</h3>
-                      <p>Focused product directions from developmental play to retail packaging.</p>
-                    </div>
-                    <div className="mega-pill-row">
-                      <span>Activity Gyms</span>
-                      <span>Quiet Books</span>
-                      <span>Comfort Blankets</span>
-                      <span>OEM / ODM</span>
-                    </div>
-                  </div>
-                  <div className="mega-grid">
-                    <div className="mega-left">
-                      {megaItems.map((item) => (
-                        <a className="mega-card" href="#products" key={item.title}>
-                          <Image src={item.image} alt={item.alt} width={420} height={315} />
-                          <div>
-                            <small>{item.detail}</small>
-                            <h4>{item.title}</h4>
-                            <p>{item.text}</p>
-                          </div>
-                        </a>
-                      ))}
-                    </div>
-                    <aside className="mega-feature">
-                      <Image
-                        src="/mega/p14.png"
-                        alt="Realbaby materials details and packaging"
-                        width={520}
-                        height={680}
-                      />
-                      <h4>Materials, Details & Packaging</h4>
-                      <p>
-                        Fabric selection, embroidery, labels, hang tags, gift boxes, and
-                        export-ready retail presentation can be adapted to your baby collection.
-                      </p>
-                      <div className="mega-actions">
-                        <a className="btn btn-primary" href="#contact">
-                          Get a Quote
-                        </a>
-                        <a className="btn btn-outline" href="/realbaby-product-catalog.pdf">
-                          Catalog
-                        </a>
-                      </div>
-                    </aside>
-                  </div>
-                </div>
-              </li>
-              <li><a href="#series">Series</a></li>
-              <li><a href="#capability">Capability</a></li>
-              <li><a href="#compliance">Compliance</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </nav>
-
-          <div className="header-actions">
-            <a className="btn btn-outline" href="/realbaby-product-catalog.pdf">Catalog</a>
-            <a className="btn btn-primary" href="#contact">Get a Quote</a>
-          </div>
+    <>
+      <div className={styles.topline}>
+        <div className="container">
+          <span>Baby soft play & developmental products</span>
+          <a href="/realbaby-product-catalog.pdf">Download 2026 Catalog</a>
         </div>
-      </header>
-
-      <section className="hero section" id="top">
-        <div className="container hero-grid">
-          <div className="hero-copy-wrap">
-            <p className="eyebrow">Baby Soft Play OEM / ODM Partner</p>
-            <h1>
-              Baby soft play products for real retail programs.
-              <span>From activity gyms to quiet books.</span>
-            </h1>
-            <p className="hero-copy">
-              Realbaby helps importers, baby brands, supermarkets, and e-commerce sellers develop
-              soft developmental products with practical customization, retail packaging, and
-              export-ready quality workflows.
-            </p>
-            <div className="cta-row">
-              <a
-                className="btn btn-primary"
-                href="#contact"
-                onClick={() => track("cta_click", { cta: "get_a_quote", position: "hero" })}
-              >
-                Get a Quote
-              </a>
-              <a
-                className="btn btn-outline"
-                href="#products"
-                onClick={() => track("cta_click", { cta: "browse_product_lines", position: "hero" })}
-              >
-                Browse Product Lines
-              </a>
+      </div>
+      <SiteHeader />
+      <main>
+        <section className={styles.hero} id="top">
+          <div className={`container ${styles.heroGrid}`}>
+            <div className={styles.heroCopy}>
+              <p className={styles.eyebrow}>OEM / ODM PARTNER · SHANGHAI</p>
+              <h1>Soft play made for <span>real childhood.</span></h1>
+              <p className={styles.slogan}>Real play. Real growth.</p>
+              <p className={styles.heroLead}>
+                Realbaby helps importers, baby brands, retailers, and education channels build
+                thoughtful soft play, comfort, and early-learning collections.
+              </p>
+              <div className={styles.heroActions}>
+                <Link className="btn btn-primary" href="/contact">Start a Project</Link>
+                <Link className="btn btn-outline" href="/products">Explore Products</Link>
+              </div>
+              <div className={styles.heroNotes} aria-label="Key service facts">
+                <span>Product development</span>
+                <span>Private label</span>
+                <span>Export-ready support</span>
+              </div>
             </div>
-            <div className="hero-proof">
-              <span>Founded 2017</span>
-              <span>OEM / ODM Baby Soft Goods</span>
-              <span>EN71 / ASTM / CPC Support</span>
+            <div className={styles.heroVisual}>
+              <div className={styles.heroImageFrame}>
+                <Image
+                  src="/images/hero/realbaby-collection.webp"
+                  alt="Realbaby soft play collection in a warm nursery setting"
+                  width={1672}
+                  height={941}
+                  priority
+                  sizes="(max-width: 900px) 100vw, 54vw"
+                />
+              </div>
+              <div className={styles.heroStamp}>
+                <Image src="/brand/real-smile.svg" alt="" width={46} height={46} />
+                <span>Keep<br />childhood real.</span>
+              </div>
             </div>
           </div>
-          <div className="hero-visual">
-            <Image
-              src="/mega/p02.png"
-              alt="Realbaby Space Explorer Activity Gym hero product visual"
-              width={900}
-              height={1125}
-              priority
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="section band" id="products">
-        <div className="container">
-          <div className="section-heading">
-            <span>Featured Collection</span>
-            <h2>Core product directions for baby sourcing teams</h2>
-            <p>
-              Explore a focused range for sourcing teams:
-              soft developmental play, comfort, learning, and retail-ready baby collections.
-            </p>
-          </div>
-          <div className="cards-3 cards-collection">
-            {featuredProducts.map((product) => (
-              <article className="card product-card" key={product.title}>
-                <Image src={product.image} alt={product.alt} width={720} height={900} />
-                <div className="card-body">
-                  <h3>{product.title}</h3>
-                  <p>{product.text}</p>
-                </div>
-              </article>
+          <div className={`container ${styles.proofRail}`}>
+            {proofPoints.map(([value, label]) => (
+              <div key={label}><strong>{value}</strong><span>{label}</span></div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section" id="series">
-        <div className="container">
-          <div className="section-heading compact">
-            <span>Product Series Architecture</span>
-            <h2>A focused category architecture buyers can understand quickly</h2>
+        <section className={styles.audience} aria-label="Who we serve">
+          <div className={`container ${styles.audienceInner}`}>
+            <strong>Built for professional buyers</strong>
+            <span>Importers</span><span>Baby Brands</span><span>Retail Chains</span>
+            <span>E-commerce</span><span>Education</span>
           </div>
-          <div className="cards-3">
-            {seriesCards.map((series) => (
-              <article className="card" key={series.title}>
-                <Image src={series.image} alt={series.alt} width={720} height={540} />
-                <div className="card-body">
-                  <h3>{series.title}</h3>
-                  <p>{series.text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section band" id="capability">
-        <div className="container">
-          <div className="section-heading">
-            <span>Production & Quality Capability</span>
-            <h2>From baby product concept to retail-ready packaging</h2>
-            <p>
-              Realbaby supports product planning, sampling, material sourcing, embroidery,
-              sewing, quality checks, packaging, and delivery coordination for market-ready baby
-              collections.
-            </p>
+        <section className={styles.section} id="series">
+          <div className="container">
+            <div className={styles.sectionHead}>
+              <div><p>FOCUSED PRODUCT SERIES</p><h2>Three clear ways to build your range.</h2></div>
+              <p>Start with an age, a play purpose, or a retail opportunity. Then tailor the details to your market.</p>
+            </div>
+            <div className={styles.seriesGrid}>
+              {productSeries.map((series, index) => (
+                <article className={styles.seriesCard} key={series.name}>
+                  <div className={styles.seriesImage}>
+                    <Image src={series.image} alt={`Realbaby ${series.name} product series`} width={900} height={1200} sizes="(max-width: 720px) 100vw, 33vw" />
+                    <span>0{index + 1}</span>
+                  </div>
+                  <div className={styles.seriesBody}>
+                    <div><span>{series.age}</span><h3>{series.name}</h3></div>
+                    <p>{series.description}</p><small>{series.products}</small>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
-          <div className="cards-3">
-            {capabilityCards.map((item) => (
-              <article className="card" key={item.title}>
-                <Image src={item.image} alt={item.alt} width={900} height={1170} />
-                <div className="card-body">
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="capability-map">
-            <LocationMap title="Realbaby Business Location" address={companyLocation.address} viewUrl={companyLocation.googleMapsUrl} zoom={10} />
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section" id="applications">
-        <div className="container application-panel">
-          <div>
-            <span className="section-kicker">Application & Buyer Scenarios</span>
-            <h2>Built for practical B2B sourcing conversations</h2>
+        <section className={`${styles.section} ${styles.momentSection}`} id="moments">
+          <div className="container">
+            <div className={`${styles.sectionHead} ${styles.lightHead}`}>
+              <div><p>EXPLORE BY PLAY MOMENT</p><h2>Products make more sense in real life.</h2></div>
+              <p>Organize assortments around the moments parents understand: play, learning, travel, connection, and calm.</p>
+            </div>
+            <div className={styles.momentGrid}>
+              {playMoments.map((moment, index) => (
+                <article className={index === 0 ? styles.momentFeature : styles.momentCard} key={moment.name}>
+                  <Image src={moment.image} alt={`Realbaby ${moment.name} play moment`} width={1448} height={1086} sizes="(max-width: 720px) 100vw, 40vw" />
+                  <div><span>0{index + 1}</span><h3>{moment.name}</h3><p>{moment.text}</p></div>
+                </article>
+              ))}
+            </div>
           </div>
-          <div className="pill-row">
-            {buyerScenarios.map((scenario) => (
-              <span key={scenario}>{scenario}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section band" id="advantages">
-        <div className="container">
-          <div className="section-heading">
-            <span>Positioning Advantage</span>
-              <h2>A sourcing partner built around clarity</h2>
-              <p>
-                Product focus, practical development steps, transparent customization, and
-                verifiable quality support help buying teams move from idea to quotation faster.
-              </p>
+        <section className={styles.section} id="products">
+          <div className="container">
+            <div className={styles.sectionHead}>
+              <div><p>PRODUCT COLLECTION</p><h2>Fifteen developed directions. One coherent brand world.</h2></div>
+              <Link className={styles.arrowLink} href="/products">View all products <span>↗</span></Link>
+            </div>
+            <div className={styles.productGrid}>
+              {products.slice(0, 8).map((product) => (
+                <Link className={styles.productCard} href={`/products/${product.slug}`} key={product.slug}>
+                  <div><Image src={product.image} alt={product.imageAlt} width={900} height={1200} sizes="(max-width: 620px) 50vw, 25vw" /></div>
+                  <span>{product.series} · {product.age}</span>
+                  <h3>{product.name}</h3>
+                  <p>{product.category}</p>
+                </Link>
+              ))}
+            </div>
+            <div className={styles.centerAction}><Link className="btn btn-outline" href="/products">Browse all 15 products</Link></div>
           </div>
-          <div className="advantage-grid">
-            {advantageCards.map((item) => (
-              <article className="advantage-card" key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section" id="process">
-        <div className="container process-grid">
-          <div>
-            <span className="section-kicker">OEM / ODM Development Process</span>
-            <h2>A practical path from idea to shipment</h2>
-            <p>
-              Buyers know what information to send, what our team will confirm, and how a project
-              moves from concept and sampling through production and delivery.
-            </p>
+        <section className={`${styles.section} ${styles.channelSection}`} id="channels">
+          <div className="container">
+            <div className={styles.sectionHead}>
+              <div><p>SOLUTIONS BY SALES CHANNEL</p><h2>Different shelves need different answers.</h2></div>
+              <p>We shape product mix, packaging, and communication around how your customers buy.</p>
+            </div>
+            <div className={styles.channelGrid}>
+              {buyerChannels.map(([name, text], index) => (
+                <article key={name}><span>{String(index + 1).padStart(2, "0")}</span><h3>{name}</h3><p>{text}</p></article>
+              ))}
+            </div>
           </div>
-          <ol className="process-list">
-            {processSteps.map((step, index) => (
-              <li key={step}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <p>{step}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+        </section>
 
-      <section className="section" id="compliance">
-        <div className="container">
-          <div className="section-heading">
-            <span>Safety & Compliance</span>
-            <h2>Keep claims verifiable and buyer-friendly</h2>
-            <p>
-              Selected Realbaby products can be supported with EN71, ASTM, and CPC-related testing
-              documentation. Factory audit and compliance files can be shared according to buyer
-              requirements and actual project scope.
-            </p>
-          </div>
-          <div className="trust-grid">
-            <article className="trust-card">
-              <Image
-                src="/mega/p18.png"
-                alt="Realbaby safety and compliance certificate showcase"
-                width={1400}
-                height={900}
-              />
-              <div>
-                <h3>Certificates & Test Documentation</h3>
-                <p>
-                  Representative test reports and product compliance files are prepared for
-                  distributor and retail review.
-                </p>
+        <section className={styles.oemSection} id="oem">
+          <div className={`container ${styles.oemGrid}`}>
+            <div className={styles.packagingCollage}>
+              <Image className={styles.packageMain} src="/images/packaging/product-gift-box.webp" alt="Realbaby retail-ready product gift box" width={1448} height={1086} />
+              <Image className={styles.packageSmallOne} src="/images/packaging/signature-red-box.webp" alt="Realbaby custom red signature gift box" width={1254} height={1254} />
+              <Image className={styles.packageSmallTwo} src="/images/packaging/shopping-bag.webp" alt="Realbaby branded shopping bag" width={1254} height={1254} />
+            </div>
+            <div className={styles.oemCopy}>
+              <p className={styles.eyebrow}>OEM / ODM & PACKAGING</p>
+              <h2>Your idea, developed as one retail-ready collection.</h2>
+              <p>Product, label, packaging, and buyer presentation are planned together so the final range feels intentional, not assembled.</p>
+              <div className={styles.capabilityList}>
+                {customCapabilities.map((item) => <span key={item}>{item}</span>)}
               </div>
-            </article>
-            <article className="trust-card">
-              <Image
-                src="/mega/p15.png"
-                alt="Realbaby production and factory audit workflow visual"
-                width={900}
-                height={1170}
-              />
+              <Link className="btn btn-primary" href="/contact">Discuss Your Collection</Link>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.processSection} id="capability">
+          <div className="container">
+            <div className={styles.sectionHead}>
+              <div><p>FROM IDEA TO DELIVERY</p><h2>A practical five-step workflow.</h2></div>
+              <p>Realbaby coordinates experienced manufacturing partners and keeps buyers aligned at each approval point.</p>
+            </div>
+            <div className={styles.processGrid}>
+              {processSteps.map(([number, title, text]) => (
+                <article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>
+              ))}
+            </div>
+            <div className={styles.capabilityMedia}>
+              <video controls playsInline preload="metadata" poster="/images/company/capability-overview.webp">
+                <source src="/videos/realbaby-brand-film.mp4" type="video/mp4" />
+              </video>
               <div>
-                <h3>Factory Audit Readiness</h3>
-                <p>
-                  Practical production workflow from inquiry and sampling to sewing, QC testing,
-                  and packaging delivery.
-                </p>
+                <p className={styles.eyebrow}>MATERIALS · DETAILS · PACKAGING</p>
+                <h3>Development support with clear checkpoints.</h3>
+                <p>Fabric selection, embroidery, printing, construction, quality checks, packaging, and export preparation are confirmed against the approved project brief.</p>
+                <div className={styles.materialTags}><span>Soft textiles</span><span>Embroidery</span><span>Private label</span><span>Export packing</span></div>
               </div>
-            </article>
+            </div>
+            <div className={styles.capabilityMap}>
+              <LocationMap address={companyLocation.address} viewUrl={companyLocation.googleMapsUrl} title="Realbaby · Shanghai, China" zoom={10} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section band" id="team">
-        <div className="container team-grid">
-          <article className="team-photo">
-            <Image
-              src="/mega/p19.png"
-              alt="Realbaby team introduction and cooperation process"
-              width={1600}
-              height={900}
-            />
-          </article>
-          <article className="team-side">
-            <span className="section-kicker">Behind Realbaby</span>
-            <h2>Build Your Realbaby Collection</h2>
-            <p>
-              Real people, practical product development, and reliable follow-up. Our team supports
-              design, sampling, production, quality, and export coordination for your baby soft
-              product collection.
-            </p>
-            <ul className="contact-list">
-              <li><strong>Website:</strong> realbabytoy.com</li>
-              <li><strong>Email:</strong> <a href="mailto:real@realbaby.cn">real@realbaby.cn</a></li>
-              <li><strong>WhatsApp:</strong> <a href="https://wa.me/8617317800686" target="_blank" rel="noreferrer">+86 173 1780 0686</a></li>
-              <li><strong>Contact:</strong> Karen</li>
-              <li><strong>Location:</strong> Shanghai</li>
-            </ul>
-          </article>
-        </div>
-      </section>
+        <section className={`${styles.section} ${styles.qualitySection}`} id="quality">
+          <div className="container">
+            <div className={styles.sectionHead}>
+              <div><p>QUALITY & SAFETY SUPPORT</p><h2>Evidence for the product and market in front of us.</h2></div>
+              <p>Selected products have supporting documentation for EN71, ASTM, and CPC-related requirements. Files are shared by project and destination market.</p>
+            </div>
+            <div className={styles.qualityLayout}>
+              <div className={styles.documentGrid}>
+                {complianceDocs.map(([name, image]) => (
+                  <article key={name}><Image src={image} alt={`Representative ${name} compliance document`} width={900} height={1180} /><strong>{name}</strong><span>Representative document</span></article>
+                ))}
+              </div>
+              <aside className={styles.auditCard}>
+                <p className={styles.eyebrow}>AUDIT-READY SUPPORT</p>
+                <h3>Documentation without overclaiming.</h3>
+                <p>Audit and compliance availability varies by manufacturing partner, product construction, and buyer program. We confirm the applicable scope before quotation.</p>
+                <div>
+                  <Image src="/images/compliance/costco-audit.webp" alt="Representative Costco audit document" width={1188} height={1107} />
+                  <Image src="/images/compliance/sedex-report.webp" alt="Representative Sedex report document" width={888} height={1170} />
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
 
-      <section className="section faq-section" id="faq">
-        <div className="container faq-grid">
-          <div>
-            <span className="section-kicker">Buyer FAQ</span>
-            <h2>Practical answers before you request a quote</h2>
-            <p>Final terms are confirmed against the actual product, market, and order scope.</p>
-            <a className="btn btn-outline" href="#contact">Ask a Project Question</a>
+        <section className={styles.storySection} id="about">
+          <div className={`container ${styles.storyGrid}`}>
+            <div className={styles.storyImage}><Image src="/images/company/team.webp" alt="Realbaby team presentation" width={1448} height={1086} /></div>
+            <div>
+              <p className={styles.eyebrow}>BEHIND REALBABY</p>
+              <h2>Real people. Real passion. Real dedication.</h2>
+              <p>Founded in 2017, Realbaby focuses on baby soft play and developmental products for international buyers. Our work connects product thinking, commercial clarity, and reliable follow-through.</p>
+              <blockquote>“We are not here to make children grow faster. We are here to help them grow more naturally.”</blockquote>
+              <Link className={styles.arrowLink} href="/about">Meet Realbaby <span>↗</span></Link>
+            </div>
           </div>
-          <div className="faq-list">
-            {faqItems.map((item) => (
-              <details key={item.question}>
-                <summary>{item.question}</summary>
-                <p>{item.answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section contact-section" id="contact">
-        <div className="container contact-grid">
-          <div>
-            <span className="section-kicker">Request a Product Proposal</span>
-            <h2>Tell us your target market and collection plan</h2>
-            <p>
-              Share your product direction, buyer type, expected quantity, and target market. We
-              will reply with a practical sourcing plan and quotation support.
-            </p>
-            <a className="catalog-link" href="/realbaby-product-catalog.pdf">
-              Download Realbaby Catalog
-            </a>
+        <section className={styles.faqSection} id="faq">
+          <div className={`container ${styles.faqLayout}`}>
+            <div><p className={styles.eyebrow}>BUYER FAQ</p><h2>Useful answers before you send a brief.</h2><p>Every quotation is product-specific, but these are the questions sourcing teams ask first.</p><Link className={styles.arrowLink} href="/contact">Ask a different question <span>↗</span></Link></div>
+            <div className={styles.faqList}>{faqItems.map(([question, answer], index) => <details key={question} open={index === 0}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div>
           </div>
-          <form className="inquiry-form" onSubmit={submitInquiry}>
-            <label>
-              Name *
-              <input name="name" type="text" required />
-            </label>
-            <label>
-              Email *
-              <input name="email" type="email" required />
-            </label>
-            <label>
-              Country *
-              <input name="country" type="text" required />
-            </label>
-            <label>
-              Sales Channel / Buyer Type *
-              <input name="buyerType" type="text" required />
-            </label>
-            <label className="full-width">
-              Product Requirement *
-              <input name="requirement" type="text" placeholder="Activity gym, quiet book, comfort blanket..." required />
-            </label>
-            <label>
-              WhatsApp
-              <input name="whatsapp" type="text" />
-            </label>
-            <label>
-              Expected Quantity
-              <input name="quantity" type="text" />
-            </label>
-            <label className="full-width">
-              Message *
-              <textarea name="message" rows={5} required />
-            </label>
-            <input type="hidden" name="utm" value={utm} />
-            <button type="submit" className="btn btn-primary" disabled={submitStatus === "submitting"}>
-              {submitStatus === "submitting" ? "Submitting..." : "Get a Quote"}
-            </button>
-            {formError ? <p className="error" role="alert">{formError}</p> : null}
-            {formFeedback ? (
-              <p className={submitStatus === "success" ? "success" : submitStatus === "error" ? "error" : ""} aria-live="polite">
-                {formFeedback}
-              </p>
-            ) : null}
-          </form>
-        </div>
-      </section>
+        </section>
 
-      <footer className="footer">
-        <div className="container footer-grid">
-          <div>
-            <p className="footer-brand">realbaby</p>
-            <p>Real play. Real growth.</p>
-            <p>Made for real childhood.</p>
+        <section className={styles.inquirySection} id="inquiry">
+          <div className={`container ${styles.inquiryGrid}`}>
+            <div>
+              <p className={styles.eyebrow}>BUILD YOUR REALBABY COLLECTION</p>
+              <h2>Tell us what your market needs next.</h2>
+              <p>Share the product direction, sales channel, target quantity, market, and timeline. Karen and the sales team will review the brief and respond with practical next steps.</p>
+              <div className={styles.contactFacts}>
+                <a href="mailto:real@realbaby.cn">real@realbaby.cn</a>
+                <a href="https://wa.me/8617317800686">WhatsApp +86 173 1780 0686</a>
+                <span>Shanghai, China</span>
+              </div>
+            </div>
+            <HomeInquiryForm />
           </div>
-          <nav aria-label="Footer navigation">
-            <a href="#products">Products</a>
-            <a href="#series">Series</a>
-            <a href="#capability">Capability</a>
-            <a href="#compliance">Compliance</a>
-            <a href="#contact">Contact</a>
-          </nav>
-          <div>
-            <p>Email: <a href="mailto:real@realbaby.cn">real@realbaby.cn</a></p>
-            <p>WhatsApp: <a href="https://wa.me/8617317800686" target="_blank" rel="noreferrer">+86 173 1780 0686</a></p>
-          </div>
-        </div>
-      </footer>
-    </main>
+        </section>
+      </main>
+      <SiteFooter />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+    </>
   );
 }

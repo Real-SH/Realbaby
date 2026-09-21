@@ -16,7 +16,7 @@ const initialFormState: InquiryFormState = {
   productRequirement: "", quantity: "", message: "", website: ""
 };
 const requiredFields: Array<keyof InquiryFormState> = [
-  "name", "email", "country", "productRequirement", "message"
+  "name", "email", "country", "buyerType", "productRequirement", "message"
 ];
 
 function isValidEmail(value: string) {
@@ -85,7 +85,7 @@ export default function ContactPage() {
     { name: "phone", label: "Phone / WhatsApp", type: "tel", placeholder: "e.g. +1 415 555 0123", required: false },
     { name: "company", label: "Company Name", type: "text", placeholder: "e.g. ABC Baby Imports", required: false },
     { name: "country", label: "Country / Region", type: "text", placeholder: "e.g. United States", required: true },
-    { name: "buyerType", label: "Sales Channel / Buyer Type", type: "text", placeholder: "e.g. Importer, retailer, DTC brand", required: false },
+    { name: "buyerType", label: "Sales Channel / Buyer Type", type: "text", placeholder: "e.g. Importer, retailer, DTC brand", required: true },
     { name: "productRequirement", label: "Product Requirement", type: "text", placeholder: "e.g. Quiet Books with OEM logo", required: true },
     { name: "quantity", label: "Expected Quantity", type: "text", placeholder: "e.g. 3,000 pieces", required: false }
   ] as const;
