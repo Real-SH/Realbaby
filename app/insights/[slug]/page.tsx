@@ -42,10 +42,10 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
     description: insight.summary,
     image: `${siteUrl}${insight.image}`,
     dateModified: "2026-09-22",
-    author: { "@type": "Organization", name: "Realbaby" },
+    author: { "@type": "Organization", name: "RealBaby" },
     publisher: {
       "@type": "Organization",
-      name: "Realbaby",
+      name: "RealBaby",
       logo: { "@type": "ImageObject", url: `${siteUrl}/logo-primary.png` }
     },
     mainEntityOfPage: `${siteUrl}/insights/${insight.slug}`

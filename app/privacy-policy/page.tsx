@@ -3,7 +3,7 @@ import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Realbaby handles website inquiries and business contact information.",
+  description: "How RealBaby handles website inquiries and business contact information.",
   alternates: { canonical: "/privacy-policy" }
 };
 
@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
           <p className="section-kicker">Last updated: September 21, 2026</p>
           <h1>Privacy Policy</h1>
           <p>
-            This policy explains how Realbaby handles information submitted through this website.
+            This policy explains how RealBaby handles information submitted through this website.
             It applies to business inquiries, quotation requests, and normal website usage.
           </p>
 

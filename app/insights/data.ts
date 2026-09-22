@@ -25,7 +25,7 @@ export const insights: Insight[] = [
     title: "How to Write a Better RFQ for Baby Soft Products",
     summary: "A practical brief for importers and brands requesting prices for cloth books, activity gyms, comfort products, and plush collections.",
     image: "/images/company/capability-overview.webp",
-    imageAlt: "Realbaby OEM and ODM product development workflow",
+    imageAlt: "RealBaby OEM and ODM product development workflow",
     updated: "September 2026",
     readTime: "5 min read",
     relatedProductSlug: "my-quiet-book",
@@ -48,7 +48,7 @@ export const insights: Insight[] = [
       {
         heading: "Separate estimates from confirmed terms",
         paragraphs: [
-          "Realbaby commonly discusses projects from 500 pieces, standard sampling around 10-15 days, and production around 40-70 days. These are planning references only. Final MOQ, cost, and timing depend on the approved design, material availability, testing, packaging, quantity, and delivery plan."
+          "RealBaby commonly discusses projects from 500 pieces, standard sampling around 10-15 days, and production around 40-70 days. These are planning references only. Final MOQ, cost, and timing depend on the approved design, material availability, testing, packaging, quantity, and delivery plan."
         ]
       },
       {
@@ -93,7 +93,7 @@ export const insights: Insight[] = [
       {
         heading: "Request project-specific documentation",
         paragraphs: [
-          "Ask which sample was tested, which standard and clauses were covered, which laboratory issued the report, and whether the report matches the production materials. Realbaby can coordinate representative EN71, ASTM F963, and CPSIA-CPC documentation according to the agreed project scope."
+          "Ask which sample was tested, which standard and clauses were covered, which laboratory issued the report, and whether the report matches the production materials. RealBaby can coordinate project-specific testing and documentation support. For US projects, CPSIA-related requirements and CPC preparation are confirmed for the actual product and agreed scope."
         ]
       },
       {
@@ -110,7 +110,7 @@ export const insights: Insight[] = [
     title: "From Brief to Approved Sample: A Practical Development Timeline",
     summary: "A structured sampling workflow for custom baby soft products, from buyer brief to production approval.",
     image: "/images/products/space-explorer-gym.webp",
-    imageAlt: "Realbaby custom activity gym product development direction",
+    imageAlt: "RealBaby custom activity gym product development direction",
     updated: "September 2026",
     readTime: "5 min read",
     relatedProductSlug: "space-explorer-activity-gym",
@@ -154,7 +154,7 @@ export const insights: Insight[] = [
     title: "Retail-Ready Packaging for Baby Soft Products",
     summary: "How gift boxes, hang tags, labels, inserts, and export cartons work together for retail and e-commerce programs.",
     image: "/images/packaging/signature-red-box.webp",
-    imageAlt: "Realbaby custom red retail gift box",
+    imageAlt: "RealBaby custom red retail gift box",
     updated: "September 2026",
     readTime: "5 min read",
     relatedProductSlug: "bunny-plush",
@@ -193,7 +193,7 @@ export const insights: Insight[] = [
     title: "Quality Control for Cloth Books, Plush and Comfort Products",
     summary: "A buyer-focused framework for checking soft construction, appearance, function, packing, and production consistency.",
     image: "/images/company/capability-overview.webp",
-    imageAlt: "Realbaby manufacturing and quality workflow overview",
+    imageAlt: "RealBaby manufacturing and quality workflow overview",
     updated: "September 2026",
     readTime: "6 min read",
     relatedProductSlug: "cloth-book",
@@ -237,7 +237,7 @@ export const insights: Insight[] = [
     title: "Developing a Cloth Book Collection Buyers Can Scale",
     summary: "A collection-planning guide covering age direction, sensory features, page architecture, construction, and line extension.",
     image: "/images/products/cloth-book.webp",
-    imageAlt: "Realbaby soft cloth book for early learning",
+    imageAlt: "RealBaby soft cloth book for early learning",
     updated: "September 2026",
     readTime: "6 min read",
     relatedProductSlug: "cloth-book",

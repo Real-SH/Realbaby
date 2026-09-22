@@ -14,7 +14,7 @@ const proofPoints = [
   ["500 pcs+", "typical MOQ for many custom soft-product projects"],
   ["10-15 days", "typical standard sampling reference"],
   ["40-70 days", "typical production lead-time reference"],
-  ["US · CA · AU · UK · EU", "main export market focus"]
+  ["US · CA · AU · UK · EU", "current market focus"]
 ];
 
 const customCapabilities = [
@@ -25,7 +25,7 @@ const customCapabilities = [
   "Private label development",
   "Custom packaging",
   "Sample development",
-  "Quality inspection",
+  "Quality inspection coordination",
   "Export support"
 ];
 
@@ -65,12 +65,12 @@ const feedbackThemes = [
 ];
 
 const faqItems = [
-  ["What is the MOQ for a custom project?", "The typical MOQ is 500 pieces for most custom projects. The final quantity depends on construction, materials, packaging, and customization depth."],
-  ["Can Realbaby develop a sample before production?", "Yes. We align the brief, artwork, materials, functions, and packaging direction before sampling, then revise agreed details before bulk approval."],
-  ["Which parts of a product can be customized?", "Options can include character design, colors, fabric, activity details, embroidery or printing, labels, instruction cards, gift packaging, and export cartons."],
-  ["Do you support EN71, ASTM, or CPC requirements?", "Testing and documentation support is planned for the actual product and destination market. Representative documents can be reviewed during the project."],
+  ["What is the MOQ for a custom project?", "Many custom soft-product projects start from a typical reference of 500 pieces. Final MOQ depends on construction, materials, packaging, quantity, and customization depth."],
+  ["Can RealBaby develop a sample before production?", "Yes. We align the brief, artwork, materials, functions, and packaging direction before sampling, then revise agreed details before bulk approval."],
+  ["Which parts of a product can be customized?", "Depending on the product, options may include size, shape, structure, materials, colors, artwork, printing, embroidery, selected functions, labels, private label, and packaging. Feasibility is confirmed for each project."],
+  ["Do you support EN71, ASTM F963, CPSIA-related requirements, or CPC preparation?", "Yes, on a project-specific basis. Testing scope and documentation are matched to the actual product, intended age, destination market, and agreed requirements. A CPC applies to a specific US children's product and is not a general company certification."],
   ["How long do sampling and bulk production take?", "Standard soft-product sampling is typically 10-15 days, while production is typically 40-70 days. Final timing depends on construction, materials, packaging, testing, order quantity, and approval rounds."],
-  ["Which buyers do you work with?", "Realbaby works with importers, distributors, baby brands, retail chains, e-commerce sellers, education channels, and gift or subscription programs."]
+  ["Which buyers do you work with?", "RealBaby works with baby brands, importers, distributors, specialty retailers, e-commerce businesses, education channels, and selected retail programs."]
 ];
 
 export default function HomePage() {
@@ -96,8 +96,7 @@ export default function HomePage() {
               <h1>Soft play made for <span>real childhood.</span></h1>
               <p className={styles.slogan}>Real play. Real growth.</p>
               <p className={styles.heroLead}>
-                Realbaby helps importers, baby brands, retailers, and education channels build
-                thoughtful soft play, comfort, and early-learning collections.
+                RealBaby connects overseas buyers' product ideas with manufacturing reality, helping baby brands, importers, distributors, specialty retailers, e-commerce businesses, and education channels build practical soft-play and developmental collections.
               </p>
               <div className={styles.heroActions}>
                 <Link className="btn btn-primary" href="/contact">Get a Quote</Link>
@@ -113,7 +112,7 @@ export default function HomePage() {
               <div className={styles.heroImageFrame}>
                 <Image
                   src="/images/hero/realbaby-collection.webp"
-                  alt="Realbaby soft play collection in a warm nursery setting"
+                  alt="RealBaby soft play collection in a warm nursery setting"
                   width={1672}
                   height={941}
                   priority
@@ -131,7 +130,7 @@ export default function HomePage() {
               <span>REAL CAPABILITY. CLEAR NUMBERS.</span>
               <p>Reference values for buyer planning. Final terms are confirmed by product and project.</p>
             </div>
-            <div className={styles.proofRail} aria-label="Realbaby commercial reference data">
+            <div className={styles.proofRail} aria-label="RealBaby commercial reference data">
               {proofPoints.map(([value, label]) => (
                 <div key={label}><strong>{value}</strong><span>{label}</span></div>
               ))}
@@ -143,7 +142,7 @@ export default function HomePage() {
           <div className={`container ${styles.audienceInner}`}>
             <strong>Built for professional buyers</strong>
             <span>Importers & Distributors</span><span>Baby Brands</span><span>Education Channels</span>
-            <span>Baby Stores</span><span>E-commerce & Amazon</span><span>Retail Chains</span>
+            <span>Baby Stores</span><span>E-commerce Businesses</span><span>Retail Chains</span>
           </div>
         </section>
 
@@ -157,11 +156,11 @@ export default function HomePage() {
               {productSeries.map((series, index) => (
                 <article className={styles.seriesCard} key={series.name}>
                   <div className={styles.seriesImage}>
-                    <Image src={series.image} alt={`Realbaby ${series.name} product series`} width={900} height={1200} sizes="(max-width: 720px) 100vw, 33vw" />
+                    <Image src={series.image} alt={`RealBaby ${series.name} product series`} width={900} height={1200} sizes="(max-width: 720px) 100vw, 33vw" />
                     <span>0{index + 1}</span>
                   </div>
                   <div className={styles.seriesBody}>
-                    <div><span>{series.age}</span><h3>{series.name}</h3></div>
+                    <div><span>Series direction · {series.age}</span><h3>{series.name}</h3></div>
                     <p>{series.description}</p><small>{series.products}</small>
                   </div>
                 </article>
@@ -179,7 +178,7 @@ export default function HomePage() {
             <div className={styles.momentGrid}>
               {playMoments.map((moment, index) => (
                 <article className={index === 0 ? styles.momentFeature : styles.momentCard} key={moment.name}>
-                  <Image src={moment.image} alt={`Realbaby ${moment.name} play moment`} width={1448} height={1086} sizes="(max-width: 720px) 100vw, 40vw" />
+                  <Image src={moment.image} alt={`RealBaby ${moment.name} play moment`} width={1448} height={1086} sizes="(max-width: 720px) 100vw, 40vw" />
                   <div><span>0{index + 1}</span><h3>{moment.name}</h3><p>{moment.text}</p></div>
                 </article>
               ))}
@@ -197,7 +196,7 @@ export default function HomePage() {
               {products.slice(0, 8).map((product) => (
                 <Link className={styles.productCard} href={`/products/${product.slug}`} key={product.slug}>
                   <div><Image src={product.image} alt={product.imageAlt} width={900} height={1200} sizes="(max-width: 620px) 50vw, 25vw" /></div>
-                  <span>{product.series} · {product.age}</span>
+                  <span>{product.series} · age direction {product.age}</span>
                   <h3>{product.name}</h3>
                   <p>{product.category}</p>
                 </Link>
@@ -224,9 +223,9 @@ export default function HomePage() {
         <section className={styles.oemSection} id="oem">
           <div className={`container ${styles.oemGrid}`}>
             <div className={styles.packagingCollage}>
-              <Image className={styles.packageMain} src="/images/packaging/product-gift-box.webp" alt="Realbaby retail-ready product gift box" width={1448} height={1086} />
-              <Image className={styles.packageSmallOne} src="/images/packaging/signature-red-box.webp" alt="Realbaby custom red signature gift box" width={1254} height={1254} />
-              <Image className={styles.packageSmallTwo} src="/images/packaging/shopping-bag.webp" alt="Realbaby branded shopping bag" width={1254} height={1254} />
+              <Image className={styles.packageMain} src="/images/packaging/product-gift-box.webp" alt="RealBaby retail-ready product gift box" width={1448} height={1086} />
+              <Image className={styles.packageSmallOne} src="/images/packaging/signature-red-box.webp" alt="RealBaby custom red signature gift box" width={1254} height={1254} />
+              <Image className={styles.packageSmallTwo} src="/images/packaging/shopping-bag.webp" alt="RealBaby branded shopping bag" width={1254} height={1254} />
             </div>
             <div className={styles.oemCopy}>
               <p className={styles.eyebrow}>OEM / ODM & PACKAGING</p>
@@ -244,7 +243,7 @@ export default function HomePage() {
           <div className="container">
             <div className={styles.sectionHead}>
               <div><p>FROM IDEA TO DELIVERY</p><h2>A practical five-step workflow.</h2></div>
-              <p>Realbaby coordinates experienced manufacturing partners and keeps buyers aligned at each approval point.</p>
+              <p>RealBaby coordinates specialized production resources and keeps buyers aligned at each approval point.</p>
             </div>
             <div className={styles.processGrid}>
               {processSteps.map(([number, title, text]) => (
@@ -269,7 +268,7 @@ export default function HomePage() {
           <div className="container">
             <div className={styles.sectionHead}>
               <div><p>QUALITY & SAFETY SUPPORT</p><h2>Evidence for the product and market in front of us.</h2></div>
-              <p>Selected products have supporting documentation for EN71, ASTM, and CPC-related requirements. Representative documents are shown with company and client details redacted for confidentiality.</p>
+              <p>Representative, product-specific files are shown for EN71, ASTM F963, CPC, and declaration-related support. Testing and documentation scope must be confirmed for the actual product, intended age, destination market, and project.</p>
             </div>
             <div className={styles.qualityLayout}>
               <div className={styles.documentGrid}>
@@ -280,10 +279,10 @@ export default function HomePage() {
               <aside className={styles.auditCard}>
                 <p className={styles.eyebrow}>AUDIT-READY SUPPORT</p>
                 <h3>Documentation without overclaiming.</h3>
-                <p>Audit and compliance availability varies by manufacturing partner, product construction, and buyer program. We confirm the applicable scope before quotation. Sensitive operational details are redacted in public previews.</p>
+                <p>The displayed retailer assessment and SMETA-related materials are representative supply-chain evidence. They do not certify RealBaby itself or imply that every production resource has the same audit status. Applicable scope is confirmed before quotation, and sensitive details are redacted in public previews.</p>
                 <div>
                   <Image src="/images/compliance/retailer-audit-redacted.png" alt="Redacted representative retailer audit document" width={1188} height={1107} />
-                  <Image src="/images/compliance/sedex-report.webp" alt="Representative Sedex report document" width={888} height={1170} />
+                  <Image src="/images/compliance/sedex-report.webp" alt="Representative SMETA-related supply-chain document" width={888} height={1170} />
                 </div>
               </aside>
             </div>
@@ -316,15 +315,16 @@ export default function HomePage() {
 
         <section className={styles.storySection} id="about">
           <div className={`container ${styles.storyGrid}`}>
-            <div className={styles.storyImage}><Image src="/images/company/team.webp" alt="Realbaby team presentation" width={1448} height={1086} /></div>
+            <div className={styles.storyImage}><Image src="/images/company/team.webp" alt="RealBaby team presentation" width={1448} height={1086} /></div>
             <div>
               <p className={styles.eyebrow}>BEHIND REALBABY</p>
               <h2>Real people. Real passion. Real dedication.</h2>
-              <p>Founded in 2015, Realbaby focuses on baby soft play and developmental products for international buyers.</p>
+              <p>Founded in 2021, RealBaby is a Baby Soft Play & Developmental Products OEM/ODM Partner for overseas B2B buyers.</p>
+              <p>Founder Karen brings 15+ years of experience in baby toys and related products, connecting each buyer's vision with practical manufacturing decisions.</p>
               <p>We believe children grow through real touch, real exploration, real companionship, and real play. Our work connects developmental thinking with commercially practical OEM/ODM execution.</p>
               <blockquote>“We are not here to make children grow faster. We are here to help them grow more naturally.”</blockquote>
               <div className={styles.storyActions}>
-                <Link className={styles.arrowLink} href="/about">Meet Realbaby <span>↗</span></Link>
+                <Link className={styles.arrowLink} href="/about">Meet RealBaby <span>↗</span></Link>
                 <a className={styles.documentLink} href="/realbaby-company-profile-2026.pdf">Download Company Profile</a>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function HomePage() {
             <div>
               <p className={styles.eyebrow}>BUILD YOUR REALBABY COLLECTION</p>
               <h2>Tell us what your market needs next.</h2>
-              <p>Share the product direction, sales channel, target quantity, market, and timeline. Karen and the sales team will review the brief and respond with practical next steps.</p>
+              <p>Share the product direction, sales channel, target quantity, market, and timeline. Karen and the team will review the brief for product feasibility, materials, construction, safety, packaging, cost direction, and practical next steps.</p>
               <div className={styles.contactFacts}>
                 <a href="mailto:real@realbaby.cn">real@realbaby.cn</a>
                 <a href="https://wa.me/8617317800686">WhatsApp +86 173 1780 0686</a>

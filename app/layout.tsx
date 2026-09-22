@@ -5,16 +5,16 @@ import { allowIndexing, siteUrl } from "./site-config";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Realbaby | Baby Soft Play & Developmental Products OEM/ODM",
-    template: "%s | Realbaby"
+    default: "RealBaby | Baby Soft Play & Developmental Products OEM/ODM",
+    template: "%s | RealBaby"
   },
   description:
-    "Realbaby is a baby soft play and developmental products OEM/ODM partner for importers, baby brands, education channels, retailers, and e-commerce buyers.",
+    "RealBaby is a baby soft play and developmental products OEM/ODM partner for importers, baby brands, education channels, retailers, and e-commerce buyers.",
   robots: allowIndexing
     ? { index: true, follow: true }
     : { index: false, follow: false, noarchive: true, nocache: true },
   keywords: [
-    "Realbaby",
+    "RealBaby",
     "baby activity gym manufacturer",
     "soft quiet books supplier",
     "OEM baby soft toys",
@@ -24,23 +24,23 @@ export const metadata: Metadata = {
   ],
   icons: { icon: "/favicon-512.png", apple: "/favicon-512.png" },
   openGraph: {
-    title: "Realbaby | Baby Soft Play & Developmental Products OEM/ODM",
+    title: "RealBaby | Baby Soft Play & Developmental Products OEM/ODM",
     description:
       "B2B development partner for baby activity gyms, soft quiet books, comfort blankets, plush soothers, and retail-ready baby collections.",
     url: siteUrl,
-    siteName: "Realbaby",
+    siteName: "RealBaby",
     locale: "en_US",
     type: "website",
     images: [{
       url: "/images/hero/realbaby-collection.webp",
       width: 1672,
       height: 941,
-      alt: "Realbaby baby soft play and developmental product collection"
+      alt: "RealBaby baby soft play and developmental product collection"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Realbaby | Baby Soft Play OEM/ODM",
+    title: "RealBaby | Baby Soft Play OEM/ODM",
     description: "Baby soft play and developmental product development for global B2B buyers."
   }
 };
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Realbaby",
+  name: "RealBaby",
   url: siteUrl,
   logo: `${siteUrl}/logo-primary.png`,
-  foundingDate: "2015",
+  foundingDate: "2021",
+  founder: { "@type": "Person", name: "Karen", jobTitle: "Founder" },
   description: "Baby soft play and developmental products OEM/ODM partner for global B2B buyers.",
   email: "real@realbaby.cn",
-  areaServed: ["United States", "Canada", "Australia", "United Kingdom", "Europe"],
   knowsAbout: [
     "Baby activity gyms and play mats",
     "Soft books and cloth books",

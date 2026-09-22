@@ -1690,3 +1690,17 @@ p {
     gap: 36px;
   }
 }
+
+.scope-note {
+  display: block;
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: #716760;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.product-detail-copy .scope-note {
+  margin-bottom: 20px;
+}

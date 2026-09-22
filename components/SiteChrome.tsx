@@ -6,9 +6,9 @@ export function SiteHeader() {
   return (
     <header className="site-header internal-header">
       <div className="container header-inner">
-        <Link className="brand-lockup" href="/" aria-label="Realbaby home">
+        <Link className="brand-lockup" href="/" aria-label="RealBaby home">
           <Image src="/brand/real-smile.svg" alt="" width={48} height={48} priority />
-          <span><strong>realbaby</strong><em>Real play. Real growth.</em></span>
+          <span><strong>RealBaby</strong><em>Real play. Real growth.</em></span>
         </Link>
         <MobileMenu />
         <nav className="main-nav" aria-label="Main navigation">
@@ -37,8 +37,8 @@ export function SiteFooter() {
       <footer className="footer">
         <div className="container footer-grid">
           <div>
-            <Image src="/brand/logo-primary.svg" alt="Realbaby - Real play. Real growth." width={230} height={86} />
-            <p>Baby soft play and developmental products for global B2B buyers.</p>
+            <Image src="/brand/logo-primary.svg" alt="RealBaby - Real play. Real growth." width={230} height={86} />
+            <p>Baby Soft Play & Developmental Products OEM/ODM Partner for overseas B2B buyers.</p>
           </div>
           <nav aria-label="Footer navigation">
             <strong>Explore</strong>
@@ -48,7 +48,7 @@ export function SiteFooter() {
             <Link href="/#capability">Manufacturing</Link>
             <Link href="/#quality">Quality & Safety</Link>
             <Link href="/insights">Buyer Insights</Link>
-            <Link href="/about">About Realbaby</Link>
+            <Link href="/about">About RealBaby</Link>
             <a href="/realbaby-product-catalog.pdf">2026 Product Catalog</a>
             <a href="/realbaby-company-profile-2026.pdf">Company Profile</a>
             <Link href="/privacy-policy">Privacy Policy</Link>
@@ -60,9 +60,9 @@ export function SiteFooter() {
             <Link className="btn btn-primary" href="/contact">Start a Project</Link>
           </div>
         </div>
-        <div className="container footer-legal">© {new Date().getFullYear()} Realbaby. Made for real childhood.</div>
+        <div className="container footer-legal">© {new Date().getFullYear()} RealBaby. Made for real childhood.</div>
       </footer>
-      <a className="floating-whatsapp" href="https://wa.me/8617317800686?text=Hello%20Realbaby%2C%20I%20would%20like%20to%20discuss%20a%20product%20project." target="_blank" rel="noreferrer" aria-label="Chat with Realbaby on WhatsApp">WA</a>
+      <a className="floating-whatsapp" href="https://wa.me/8617317800686?text=Hello%20RealBaby%2C%20I%20would%20like%20to%20discuss%20a%20product%20project." target="_blank" rel="noreferrer" aria-label="Chat with RealBaby on WhatsApp">WA</a>
     </>
   );
 }

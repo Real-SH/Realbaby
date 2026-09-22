@@ -18,7 +18,7 @@ export default function InsightsPage() {
         <section className="inner-hero insights-index-hero">
           <div className="container inner-hero-grid">
             <div>
-              <p className="section-kicker">Realbaby Buyer Insights</p>
+              <p className="section-kicker">RealBaby Buyer Insights</p>
               <h1>Clear answers for better product decisions.</h1>
               <p className="inner-lead">Focused guidance for importers, baby brands, education channels, retailers, and e-commerce buyers developing soft play and developmental products.</p>
             </div>

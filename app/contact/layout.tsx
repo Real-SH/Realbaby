@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact & Request a Quote",
   description:
-    "Send Realbaby your baby product sourcing requirements for OEM/ODM development, samples, packaging, and quotation support.",
+    "Send RealBaby your baby product sourcing requirements for OEM/ODM development, samples, packaging, and quotation support.",
   alternates: { canonical: "/contact" }
 };
 

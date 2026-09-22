@@ -76,7 +76,7 @@ async function deliverWithResend(record: Record<string, unknown>) {
 
   const destinationEmail = process.env.INQUIRY_TARGET_EMAIL?.trim() || "real@realbaby.cn";
   const fromEmail =
-    process.env.INQUIRY_FROM_EMAIL?.trim() || "Realbaby Website <website@realbabytoy.com>";
+    process.env.INQUIRY_FROM_EMAIL?.trim() || "RealBaby Website <website@realbabytoy.com>";
   const safe = Object.fromEntries(
     Object.entries(record).map(([key, value]) => [
       key,
@@ -94,9 +94,9 @@ async function deliverWithResend(record: Record<string, unknown>) {
       from: fromEmail,
       to: [destinationEmail],
       reply_to: record.email,
-      subject: `New Realbaby inquiry from ${record.name}`,
+      subject: `New RealBaby inquiry from ${record.name}`,
       html: `
-        <h2>New Realbaby website inquiry</h2>
+        <h2>New RealBaby website inquiry</h2>
         <p><strong>Name:</strong> ${safe.name}</p>
         <p><strong>Email:</strong> ${safe.email}</p>
         <p><strong>Phone / WhatsApp:</strong> ${safe.phone || "Not provided"}</p>
