@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MobileMenu } from "./MobileMenu";
 
 export function SiteHeader() {
   return (
@@ -9,6 +10,7 @@ export function SiteHeader() {
           <Image src="/brand/real-smile.svg" alt="" width={48} height={48} priority />
           <span><strong>realbaby</strong><em>Real play. Real growth.</em></span>
         </Link>
+        <MobileMenu />
         <nav className="main-nav" aria-label="Main navigation">
           <ul>
             <li><Link href="/products">Products</Link></li>
